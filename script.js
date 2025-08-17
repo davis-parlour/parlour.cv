@@ -1028,7 +1028,7 @@ function startTypingEffect() {
             root.appendChild(container);
             const btnDefs = [
                 { html: 'View My Work', cls: 'btn btn-primary btn-appearing', href: '#projects' },
-                { html: '<i class="fas fa-download"></i> Download CV', cls: 'btn btn-secondary btn-appearing', href: 'Davis Parlour CV, 02-07-2025.pdf', target: '_blank' }
+                { html: '<i class="fas fa-download"></i> Download CV', cls: 'btn btn-secondary btn-appearing', href: 'Davis-Parlour-CV.pdf', target: '_blank' }
             ];
             let b = 0;
             function nextBtn(){
@@ -1170,4 +1170,5 @@ function debounce(func, wait) {
 
 // Apply debouncing to scroll-heavy functions
 window.addEventListener('scroll', debounce(parallaxEffect, 10));
+
 
