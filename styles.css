@@ -1,92 +1,164 @@
 @media (max-width: 600px) {
-    .typing-text {
-        margin-top: 80px !important;
-    }
     .project-wheel-container {
-        padding: 10px 0 30px 0;
+        padding: 0 20px;
         max-width: 100vw;
-        overflow-x: hidden;
+        overflow: visible;
+        position: relative;
     }
     .project-wheel {
-        display: block;
-        width: 100vw;
-        max-width: 100vw;
-        min-width: 0;
+        width: 100%;
+        max-width: 100%;
         height: auto;
         margin: 0;
-        transform: none !important;
+        position: relative;
         perspective: none;
-        cursor: default;
+        touch-action: pan-y;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
     }
     .project-item {
-        position: static !important;
-        width: 95vw !important;
-        max-width: 420px;
-        min-width: 0;
+        width: calc(100% - 40px) !important;
+        max-width: 350px !important;
+        min-height: 420px !important;
         height: auto !important;
-        margin: 0 auto 2.2rem auto;
+        margin: 0 auto 1.2rem auto !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        background: rgba(24, 26, 34, 0.6);
+        backdrop-filter: blur(15px) saturate(130%);
+        -webkit-backdrop-filter: blur(15px) saturate(130%);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: box-shadow 0.3s, background 0.3s, border-color 0.3s;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
         transform: none !important;
-        opacity: 0;
-        filter: none !important;
-        will-change: opacity, transform;
-        user-select: auto;
-        z-index: auto;
-        backface-visibility: visible;
+        opacity: 1;
+        pointer-events: none;
+    }
+    .project-item.focused {
+        display: flex;
         pointer-events: auto;
-        animation: projectCardFadeIn 0.7s cubic-bezier(.22,1,.36,1) forwards;
-        box-shadow: 0 8px 32px 0 rgba(0,212,255,0.18), 0 1.5px 8px 0 rgba(255,0,200,0.10);
-        background: rgba(20, 20, 30, 0.45);
-        backdrop-filter: blur(18px) saturate(120%);
-        -webkit-backdrop-filter: blur(18px) saturate(120%);
-        transition: box-shadow 0.3s, background 0.3s;
+        z-index: 10;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(24, 26, 34, 0.7);
     }
-    .project-item:active {
-        box-shadow: 0 2px 16px 0 rgba(0,212,255,0.22), 0 1.5px 8px 0 rgba(255,0,200,0.13);
-        background: rgba(30, 30, 40, 0.55);
-        transition: box-shadow 0.2s, background 0.2s;
+    .wheel-controls {
+        display: flex !important;
+        margin-top: 1.8rem;
+        gap: 1.5rem;
+        justify-content: center;
+        align-items: center;
     }
-    @keyframes projectCardFadeIn {
-        0% { opacity: 0; transform: translateY(30px) scale(0.98); }
-        80% { opacity: 1; transform: translateY(-4px) scale(1.01); }
-        100% { opacity: 1; transform: translateY(0) scale(1); }
+    .typing-text {
+        .wheel-btn {
+            width: 56px;
+            height: 56px;
+            font-size: 1.4rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            touch-action: manipulation;
+        }
+        .wheel-btn:hover, .wheel-btn:active {
+            background: rgba(0, 212, 255, 0.3);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+        }
+        .wheel-dots {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .wheel-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .wheel-dot:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+        .wheel-dot.active {
+            background: #ffffff;
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+        }
     }
     .project-card {
         min-height: 0;
         height: auto;
         border-radius: 18px;
         box-shadow: none;
-        background: rgba(30, 30, 40, 0.55);
-        backdrop-filter: blur(18px) saturate(120%);
-        -webkit-backdrop-filter: blur(18px) saturate(120%);
-        padding-bottom: 1.2rem;
-        transition: background 0.3s;
-    }
-    .project-card:active {
-        background: rgba(40, 40, 55, 0.65);
+        background: transparent;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
     }
     .project-image {
         height: 44px;
         border-top-left-radius: 18px;
         border-top-right-radius: 18px;
+        background: linear-gradient(45deg, #00d4ff, #ff00c8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.1rem;
+        color: #fff;
     }
     .project-content {
-        padding: 1.25rem 1.1rem 0.7rem 1.1rem;
-        font-size: 1.08rem;
+        padding: 1.15rem 1.1rem 0.7rem 1.1rem;
+        font-size: 1.2rem;
+        text-align: left;
     }
     .project-content h3 {
-        font-size: 1.13rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.35rem;
+        margin-bottom: 0.45rem;
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: -0.01em;
     }
     .project-content p {
-        font-size: 0.93rem;
+        font-size: 1.1rem;
         margin-bottom: 0.7rem;
+        color: #e0e0e0;
+        line-height: 1.5;
     }
     .project-tech {
+        display: flex;
+        flex-wrap: wrap;
         gap: 0.32rem;
         margin-bottom: 0.7rem;
     }
+    .tech-tag {
+        padding: 3px 10px;
+        background: rgba(0, 212, 255, 0.18);
+        color: #00d4ff;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(0, 212, 255, 0.22);
+    }
     .project-links {
+        display: flex;
         gap: 0.5rem;
+        margin-top: 0.2rem;
     }
     .project-badge, .project-link {
         width: 36px;
@@ -94,11 +166,33 @@
         font-size: 1.08rem;
         border-radius: 50%;
         transition: background 0.2s, box-shadow 0.2s;
+        background: rgba(255,255,255,0.08);
+        color: #00d4ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .project-link:active, .project-badge:active {
         background: #00d4ff;
         color: #fff;
         box-shadow: 0 2px 8px rgba(0,212,255,0.18);
+    }
+    .section-title {
+        font-size: 1.3rem;
+        text-align: center;
+        margin-bottom: 0.7rem;
+    }
+    .section-header {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    /* Remove any horizontal scroll on mobile */
+    body, html {
+        overflow-x: hidden !important;
+    }
+    /* Hide any overflow from project wheel */
+    .project-wheel {
+        overflow-x: visible !important;
     }
     .project-image {
         height: 44px;
@@ -122,15 +216,12 @@
     }
     .section-title {
         font-size: 1.3rem;
-        text-align: left;
+        text-align: center;
         margin-bottom: 0.7rem;
     }
     .section-header {
         padding-left: 1rem;
         padding-right: 1rem;
-    }
-    .wheel-controls {
-        display: none !important;
     }
 }
 /* Reset and Base Styles */
@@ -1423,7 +1514,19 @@ body {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
+        white-space: nowrap;
+        line-height: 1.1;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+        gap: 6px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
     }
 
     .about-stats {
