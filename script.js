@@ -896,7 +896,7 @@ function startTypingEffect() {
     const lines = [
         { text: "Hi, I'm Davis Parlour,", tag: 'h1', cls: 'hero-title', speed: FAST_SPEED, cursor: 'gradient' },
         { text: 'Software Engineer.', tag: 'p', cls: 'hero-subtitle', speed: FAST_SPEED, cursor: 'normal' },
-        { text: 'First-Class BSc Computer Science graduate with a passion for solving complex problems, experience in system architecture, embedded systems, and collaborative software development.', tag: 'p', cls: 'hero-description', speed: FAST_SPEED, cursor: 'normal' }
+        { text: 'First-Class BSc Computer Science', tag: 'p', cls: 'hero-description', speed: FAST_SPEED, cursor: 'normal' }
     ];
 
     const timeouts = [];

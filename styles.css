@@ -24,22 +24,81 @@
         max-width: 420px;
         min-width: 0;
         height: auto !important;
-        margin: 0 auto 1.5rem auto;
+        margin: 0 auto 2.2rem auto;
         transform: none !important;
-        opacity: 1 !important;
+        opacity: 0;
         filter: none !important;
-        will-change: unset;
+        will-change: opacity, transform;
         user-select: auto;
         z-index: auto;
         backface-visibility: visible;
         pointer-events: auto;
+        animation: projectCardFadeIn 0.7s cubic-bezier(.22,1,.36,1) forwards;
+        box-shadow: 0 8px 32px 0 rgba(0,212,255,0.18), 0 1.5px 8px 0 rgba(255,0,200,0.10);
+        background: rgba(20, 20, 30, 0.45);
+        backdrop-filter: blur(18px) saturate(120%);
+        -webkit-backdrop-filter: blur(18px) saturate(120%);
+        transition: box-shadow 0.3s, background 0.3s;
+    }
+    .project-item:active {
+        box-shadow: 0 2px 16px 0 rgba(0,212,255,0.22), 0 1.5px 8px 0 rgba(255,0,200,0.13);
+        background: rgba(30, 30, 40, 0.55);
+        transition: box-shadow 0.2s, background 0.2s;
+    }
+    @keyframes projectCardFadeIn {
+        0% { opacity: 0; transform: translateY(30px) scale(0.98); }
+        80% { opacity: 1; transform: translateY(-4px) scale(1.01); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
     }
     .project-card {
         min-height: 0;
         height: auto;
-        border-radius: 16px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+        border-radius: 18px;
+        box-shadow: none;
+        background: rgba(30, 30, 40, 0.55);
+        backdrop-filter: blur(18px) saturate(120%);
+        -webkit-backdrop-filter: blur(18px) saturate(120%);
         padding-bottom: 1.2rem;
+        transition: background 0.3s;
+    }
+    .project-card:active {
+        background: rgba(40, 40, 55, 0.65);
+    }
+    .project-image {
+        height: 44px;
+        border-top-left-radius: 18px;
+        border-top-right-radius: 18px;
+    }
+    .project-content {
+        padding: 1.25rem 1.1rem 0.7rem 1.1rem;
+        font-size: 1.08rem;
+    }
+    .project-content h3 {
+        font-size: 1.13rem;
+        margin-bottom: 0.5rem;
+    }
+    .project-content p {
+        font-size: 0.93rem;
+        margin-bottom: 0.7rem;
+    }
+    .project-tech {
+        gap: 0.32rem;
+        margin-bottom: 0.7rem;
+    }
+    .project-links {
+        gap: 0.5rem;
+    }
+    .project-badge, .project-link {
+        width: 36px;
+        height: 36px;
+        font-size: 1.08rem;
+        border-radius: 50%;
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+    .project-link:active, .project-badge:active {
+        background: #00d4ff;
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(0,212,255,0.18);
     }
     .project-image {
         height: 44px;
