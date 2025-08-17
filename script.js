@@ -988,7 +988,7 @@ function startTypingEffect() {
 
         const codeLines = [
             '<a class="btn btn-primary" href="#projects">View My Work</a>',
-            '<a class="btn btn-secondary" href="Davis Parlour CV, 02-07-2025.pdf" target="_blank">Download CV</a>'
+            '<a class="btn btn-secondary" href="Davis-Parlour-CV.pdf" target="_blank">Download CV</a>'
         ];
         const fullCode = codeLines.join('\n');
         let codeIndex = 0;
@@ -1170,3 +1170,4 @@ function debounce(func, wait) {
 
 // Apply debouncing to scroll-heavy functions
 window.addEventListener('scroll', debounce(parallaxEffect, 10));
+
