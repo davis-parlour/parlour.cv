@@ -1,4 +1,4 @@
-// Mobile Navigation Toggle
+// mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -7,13 +7,13 @@ hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
-// Close mobile menu when clicking on a link
+// close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
     hamburger.classList.remove('active');
     navMenu.classList.remove('active');
 }));
 
-// Smooth scrolling for navigation links
+// smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -27,7 +27,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
+// navbar background on scroll
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 100) {
@@ -37,17 +37,17 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Animated Counter for Stats
+// animated counter for stats
 let __aboutCountersAnimated = false; // prevents re-running counters on repeated intersection
 function animateCounters() {
-    if (__aboutCountersAnimated) return; // safety guard
+    if (__aboutCountersAnimated) return;
     const counters = document.querySelectorAll('.stat-number');
     
     counters.forEach(counter => {
         const target = counter.getAttribute('data-count');
         const showPlus = counter.getAttribute('data-plus') === 'true';
         
-        // Handle different target formats
+        // handle different target formats
         let numericTarget;
         if (target.includes('%')) {
             numericTarget = parseInt(target.replace(/[^\d]/g, ''));
@@ -81,7 +81,7 @@ function animateCounters() {
     __aboutCountersAnimated = true; // mark done after scheduling first batch
 }
 
-// Intersection Observer for animations
+// intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -93,7 +93,7 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
             
-            // Trigger counter animation for stats section
+            // trigger counter animation for stats section
             if (entry.target.id === 'about' && !__aboutCountersAnimated) {
                 setTimeout(animateCounters, 500);
             }
@@ -101,7 +101,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all sections for animations
 document.querySelectorAll('section').forEach(section => {
     section.style.opacity = '0';
     section.style.transform = 'translateY(50px)';
@@ -113,7 +112,7 @@ class SkillBubbles {
     constructor() {
         this.container = document.getElementById('bubbleContainer');
         this.bubbles = [];
-    // Coffee level 0-3 (slider value); internal physics parameters derived from this
+    // coffee level 0-3 (slider value); internal physics parameters derived from this
     this.coffeeLevel = 1; // default 1 cup
     this.baseConfig = { friction: 0.99 };
         
@@ -123,13 +122,12 @@ class SkillBubbles {
     }
     
     init() {
-        // Setup intensity slider
+        // setup COFFEE intensity slider
         const slider = document.getElementById('intensitySlider');
         const valueEl = document.getElementById('intensityValue');
         if (slider && valueEl) {
-            // User-facing cups: 1..8 -> four qualitative steps.
             const labelFor = (cups) => {
-                // Mapping:
+                // mapping:
                 // 1 -> Sleepy
                 // 2 -> Warming Up
                 // 3-4 -> Productive
@@ -143,23 +141,22 @@ class SkillBubbles {
             };
             const updateLabel = () => {
                 const cups = parseInt(slider.value, 10);
-                // Map 1..6 to 0..3 range (non-linear slight ease for fun)
                 const normalized = (cups - 1) / 5; // 0..1
-                const eased = Math.pow(normalized, 0.8); // slightly stronger ease
-                this.coffeeLevel = 3 * eased; // internal 0..3
+                const eased = Math.pow(normalized, 0.8);
+                this.coffeeLevel = 3 * eased; // 0..3
 
                 const d = labelFor(cups);
-                // Update slider ARIA
+                // update slider ARIA
                 slider.setAttribute('aria-valuenow', String(cups));
                 slider.setAttribute('aria-valuetext', d.stage);
-                // Update stage class on parent card for styling hooks
+                // update stage class on parent card for styling hooks
                 const card = document.getElementById('coffeeSliderCard') || slider.parentElement;
                 if (card) {
                     card.classList.remove('coffee-stage-sleepy','coffee-stage-warming','coffee-stage-productive','coffee-stage-too-many');
                     const key = d.stage.toLowerCase().replace(/\s+/g,'-');
                     card.classList.add('coffee-stage-' + (key === 'too-many' ? 'too-many' : key));
                 }
-                // Reset base styles
+                // reset base styles
                 valueEl.style.animation = 'none';
                 valueEl.style.background = 'none';
                 valueEl.style.webkitBackgroundClip = '';
@@ -191,7 +188,7 @@ class SkillBubbles {
             slider.addEventListener('input', updateLabel);
             updateLabel();
 
-            // Calm Down button logic
+            // calm down button
             const calmBtn = document.getElementById('calmCoffee');
             if (calmBtn) {
                 calmBtn.addEventListener('click', () => {
@@ -208,64 +205,64 @@ class SkillBubbles {
             }
         }
         
-        // Setup reset button
+        // setup reset button
         const resetBtn = document.getElementById('resetBubbles');
         if (resetBtn) {
             resetBtn.addEventListener('click', () => this.createBubbles());
         }
         
-        // Create initial bubbles
+        // create initial bubbles
         this.createBubbles();
         this.startLoop();
     }
     
     createBubbles() {
-        // Clear existing bubbles
+        // clear existing bubbles (useful if reset)
         this.bubbles.forEach(b => b.element.remove());
         this.bubbles = [];
         
-        const skills = [
-            // Proficient Languages (from CV)
+        const skills = [ // (from my cv)
+            // proficient languages
             'Java', 'C', 'C++', 'MATLAB',
             'JavaScript', 'PHP', 'HTML', 'CSS',
             'Python', 'SQL', 'Bash',
             
-            // Technologies & Frameworks
+            // technologies & frameworks
             'Git', 'Unix/Linux', 'nRF52 MCU',
             'Java RMI', 'I2C', 'PWM',
             'Q-Graphs', 'Machine Learning',
             'Genetic Algorithms',
             
-            // Familiar/Learning
+            // familiar/learning
             'Assembly', 'Rust', 'ERLang'
         ];
         
         const rect = this.container.getBoundingClientRect();
         const colors = [
-            // Primary theme colors (cyan/blue variants)
+            // primary theme colors (cyan/blue variants)
             '#00d4ff', '#1ac6ff', '#33b8ff', '#4daaff', '#669cff',
             '#0099cc', '#00aadd', '#00bbee', '#1199dd', '#2288cc',
             '#0077bb', '#0088cc', '#1177bb', '#2266aa', '#3355aa',
             
-            // Secondary theme colors (pink/magenta variants) 
+            // secondary theme colors (pink/magenta variants) 
             '#ff00c8', '#ff1ad1', '#ff33da', '#ff4de3', '#ff66ec',
             '#dd0099', '#ee00aa', '#ff00bb', '#dd1199', '#cc2288',
             '#bb1177', '#aa0088', '#cc1199', '#dd22aa', '#ee33bb',
             
-            // Purple variants (complementary to cyan/pink)
+            // purple variants (complementary to cyan/pink)
             '#aa00ff', '#bb1aff', '#cc33ff', '#9900dd', '#8800cc',
             '#7700bb', '#8811cc', '#9922dd', '#aa33ee', '#bb44ff',
             
-            // Accent colors (warm variants)
+            // accent colors (warm variants)
             '#ff6b47', '#ff7a56', '#ff8965', '#ff9874', '#ffa783',
             '#ff5533', '#ff6644', '#ff7755', '#ff8866', '#ff9977'
         ];
         
         skills.forEach((skill, i) => {
-            // Calculate smaller bubble size based on text length
+            // calculate bubble size based on text length
             const textLength = skill.length;
-            const minRadius = Math.max(25, textLength * 2.8); // Reduced from 3.5 to 2.8
-            const maxRadius = minRadius + 15; // Reduced from 20 to 15
+            const minRadius = Math.max(25, textLength * 2.8); 
+            const maxRadius = minRadius + 15; 
             const radius = minRadius + Math.random() * (maxRadius - minRadius);
             
             const bubble = {
@@ -290,13 +287,13 @@ class SkillBubbles {
             el.style.left = (bubble.x - bubble.radius) + 'px';
             el.style.top = (bubble.y - bubble.radius) + 'px';
             
-            // Adjust font size based on bubble size for better fit (smaller)
-            const fontSize = Math.max(8, Math.min(12, bubble.radius * 0.25)); // Reduced from 0.3 to 0.25
+            // adjust font size based on bubble size for better fit (smaller)
+            const fontSize = Math.max(8, Math.min(12, bubble.radius * 0.25));
             el.style.fontSize = fontSize + 'px';
             
             bubble.element = el;
             
-            // Add drag functionality
+            // add drag functionality
             this.addDragListeners(bubble);
             
             this.container.appendChild(el);
@@ -307,14 +304,13 @@ class SkillBubbles {
     addDragListeners(bubble) {
         let dragData = { 
             isDragging: false,
-            hasStartedDrag: false, // Track if we've actually started dragging
+            hasStartedDrag: false,
             startX: 0, 
             startY: 0, 
             targetX: 0, 
             targetY: 0,
             offsetX: 0, 
             offsetY: 0,
-            // Velocity tracking for slingshot
             lastMouseX: 0,
             lastMouseY: 0,
             mouseVelX: 0,
@@ -325,24 +321,24 @@ class SkillBubbles {
         bubble.element.addEventListener('mousedown', (e) => {
             e.preventDefault();
             dragData.isDragging = true;
-            dragData.hasStartedDrag = false; // Reset drag state
+            dragData.hasStartedDrag = false;
             bubble.isDragging = true;
             
             const rect = this.container.getBoundingClientRect();
             
-            // Record starting position
+            // record starting position
             dragData.startX = bubble.x;
             dragData.startY = bubble.y;
             
-            // Calculate drag offset from bubble center
+            // calculate drag offset from bubble center
             dragData.offsetX = e.clientX - rect.left - bubble.x;
             dragData.offsetY = e.clientY - rect.top - bubble.y;
             
-            // Initialize target to current position (no movement yet)
+            // initialize target to current position (no movement yet)
             dragData.targetX = bubble.x;
             dragData.targetY = bubble.y;
             
-            // Initialize velocity tracking
+            // initialize velocity tracking
             dragData.lastMouseX = e.clientX - rect.left;
             dragData.lastMouseY = e.clientY - rect.top;
             dragData.mouseVelX = 0;
@@ -356,28 +352,28 @@ class SkillBubbles {
                     const currentMouseX = e.clientX - rect.left;
                     const currentMouseY = e.clientY - rect.top;
                     
-                    // Calculate mouse velocity (pixels per millisecond)
+                    // calculate mouse velocity (pixels per millisecond)
                     const timeDelta = Math.max(1, currentTime - dragData.lastMoveTime);
                     dragData.mouseVelX = (currentMouseX - dragData.lastMouseX) / timeDelta;
                     dragData.mouseVelY = (currentMouseY - dragData.lastMouseY) / timeDelta;
                     
-                    // Store current mouse position for next calculation
+                    // store current mouse position for next calculation
                     dragData.lastMouseX = currentMouseX;
                     dragData.lastMouseY = currentMouseY;
                     dragData.lastMoveTime = currentTime;
                     
-                    // Calculate where the mouse wants the bubble to be
+                    // calculate where the mouse wants the bubble to be
                     let targetX = currentMouseX - dragData.offsetX;
                     let targetY = currentMouseY - dragData.offsetY;
                     
-                    // Keep target in bounds
+                    // keep target in bounds
                     targetX = Math.max(bubble.radius, Math.min(rect.width - bubble.radius, targetX));
                     targetY = Math.max(bubble.radius, Math.min(rect.height - bubble.radius, targetY));
                     
-                    // Mark that we've started actually dragging
+                    // mark that we've started actually dragging
                     dragData.hasStartedDrag = true;
                     
-                    // Store target for bubble to follow
+                    // store target for bubble to follow
                     dragData.targetX = targetX;
                     dragData.targetY = targetY;
                 }
@@ -385,12 +381,12 @@ class SkillBubbles {
             
             const mouseup = (e) => {
                 if (dragData.isDragging) {
-                    // Use the mouse velocity at release for slingshot effect
-                    const velocityFactor = 12; // Adjust for more/less slingshot effect
+                    // use the mouse velocity at release for slingshot effect
+                    const velocityFactor = 12;
                     bubble.vx = dragData.mouseVelX * velocityFactor;
                     bubble.vy = dragData.mouseVelY * velocityFactor;
                     
-                    // Cap maximum slingshot velocity
+                    // cap maximum slingshot velocity
                     const maxVel = 8;
                     bubble.vx = Math.max(-maxVel, Math.min(maxVel, bubble.vx));
                     bubble.vy = Math.max(-maxVel, Math.min(maxVel, bubble.vy));
@@ -407,7 +403,7 @@ class SkillBubbles {
             document.addEventListener('mouseup', mouseup);
         });
         
-        // Store drag data on bubble for use in update loop
+        // store drag data on bubble for use in update loop
         bubble.dragData = dragData;
     }
     
@@ -423,73 +419,72 @@ class SkillBubbles {
         const rect = this.container.getBoundingClientRect();
         
     this.bubbles.forEach(bubble => {
-            // Handle dragged bubbles with closer following and collision pushing
+            // handle dragged bubbles with closer following and collision pushing
             if (bubble.isDragging && bubble.dragData) {
                 const dragData = bubble.dragData;
                 
-                // ONLY apply lag behavior after actual dragging has started
+                // only apply lag behavior after actual dragging has started
                 if (dragData.hasStartedDrag) {
-                    // New smoother drag: snap when close, smooth when far to avoid jitter 'ping-pong'
+                    // smooth drag: snap when close, smooth when far to avoid jitter 'ping-pong'
                     const dx = dragData.targetX - bubble.x;
                     const dy = dragData.targetY - bubble.y;
                     const dist = Math.hypot(dx, dy);
                     if (dist > 20) {
-                        // Far: move quickly towards cursor
+                        // far: move quickly towards cursor
                         bubble.x += dx * 0.5;
                         bubble.y += dy * 0.5;
                     } else if (dist > 2) {
-                        // Near: gentle easing
+                        // near: gentle easing
                         bubble.x += dx * 0.35;
                         bubble.y += dy * 0.35;
                     } else {
-                        // Snap when very close
+                        // snap when very close
                         bubble.x = dragData.targetX;
                         bubble.y = dragData.targetY;
                     }
-                    // Zero out velocities while dragging so we don't accumulate bounce energy
+                    // zero out velocities while dragging so we don't accumulate bounce energy
                     bubble.vx = 0;
                     bubble.vy = 0;
                 }
-                // If we haven't started dragging yet, bubble stays in place
+                // if we haven't started dragging yet, bubble stays in place
                 
-                // COLLISION PUSHING: Dragged bubble pushes others away (simplified)
+                // COLLISION PUSHING: dragged bubble pushes others away
                 this.bubbles.forEach(other => {
                     if (other === bubble || other.isDragging) return;
                     
                     const dx = other.x - bubble.x;
                     const dy = other.y - bubble.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    const minDistance = bubble.radius + other.radius + 5; // Add buffer space
+                    const minDistance = bubble.radius + other.radius + 5;
                     
                     if (distance < minDistance && distance > 0) {
-                        // Simple push away from dragged bubble
-                        const pushStrength = 0.5; // Gentler push
+                        // simple push away from dragged bubble
                         const nx = dx / distance;
                         const ny = dy / distance;
                         
-                        // Move other bubble to safe distance
-                        const targetDistance = minDistance + 2; // Extra spacing
+                        // move other bubble to safe distance
+                        const targetDistance = minDistance + 2;
                         other.x = bubble.x + nx * targetDistance;
                         other.y = bubble.y + ny * targetDistance;
                         
-                        // Add gentle velocity away from dragged bubble
+                        // add gentle velocity away from dragged bubble
                         other.vx += nx * 2;
                         other.vy += ny * 2;
                         
-                        // Keep in bounds
+                        // keep in bounds
                         other.x = Math.max(other.radius, Math.min(rect.width - other.radius, other.x));
                         other.y = Math.max(other.radius, Math.min(rect.height - other.radius, other.y));
                     }
                 });
                 
-                // Update DOM position for dragged bubbles
+                // update DOM position for dragged bubbles
                 bubble.element.style.left = (bubble.x - bubble.radius) + 'px';
                 bubble.element.style.top = (bubble.y - bubble.radius) + 'px';
-                return; // Skip regular physics for dragged bubbles
+                return; // skip regular physics for dragged bubbles
             }
             
-            // Derive physics factors from coffee level
-            // Speed multiplier grows roughly exponentially for extra chaos
+            // derive physics factors from coffee level
+            // speed multiplier grows roughly exponentially for extra chaos
             const speedMul = 0.6 + (this.coffeeLevel * 0.55) + Math.pow(this.coffeeLevel, 1.6) * 0.15; // ~0.6 -> ~2.3
             const friction = 0.99 - (this.coffeeLevel * 0.01); // 0.99 down to 0.96
             const wallBounceRetention = 0.85 + (this.coffeeLevel * 0.03); // 0.85 -> 0.94
@@ -497,21 +492,21 @@ class SkillBubbles {
             const jitterChance = this.coffeeLevel * 0.02; // up to 6% per frame at lvl 3
             const jitterMagnitude = 0.5 + this.coffeeLevel * 1.2; // 0.5 -> 4.1
 
-            // Apply physics to non-dragged bubbles with coffee-based energy
+            // apply physics to non-dragged bubbles with coffee-based energy
             bubble.x += bubble.vx * speedMul;
             bubble.y += bubble.vy * speedMul;
 
-            // Random jitter (micro-tremor) at higher coffee levels
+            // random jitter at high coffee levels
             if (Math.random() < jitterChance) {
                 bubble.vx += (Math.random() - 0.5) * jitterMagnitude;
                 bubble.vy += (Math.random() - 0.5) * jitterMagnitude;
             }
 
-            // Friction
+            // friction
             bubble.vx *= friction;
             bubble.vy *= friction;
             
-            // Bounce off walls with more energy retention (icy bounces)
+            // bounce off of walls
             if (bubble.x - bubble.radius <= 0) {
                 bubble.x = bubble.radius;
                 bubble.vx = Math.abs(bubble.vx) * wallBounceRetention;
@@ -529,7 +524,7 @@ class SkillBubbles {
                 bubble.vy = -Math.abs(bubble.vy) * wallBounceRetention;
             }
             
-            // Bubble-to-bubble collisions (ice-like sliding)
+            // bubble collisions
             this.bubbles.forEach(other => {
                 if (bubble === other || other.isDragging || bubble.isDragging) return;
                 
@@ -539,21 +534,20 @@ class SkillBubbles {
                 const minDistance = bubble.radius + other.radius;
                 
                 if (distance < minDistance && distance > 0) {
-                    // Separate bubbles first (prevents sticking)
+                    // separate bubbles first (prevents sticking)
                     const overlap = minDistance - distance;
                     const separateForce = overlap * 0.5;
                     
                     const nx = dx / distance;
                     const ny = dy / distance;
                     
-                    // Move bubbles apart
+                    // BOUNCE bubbles
                     bubble.x += nx * separateForce;
                     bubble.y += ny * separateForce;
                     other.x -= nx * separateForce;
                     other.y -= ny * separateForce;
                     
-                    // Ice-like collision - more sliding, less stopping
-                    const bounceStrength = collisionBounce; // Higher = more sliding / chaos with coffee
+                    const bounceStrength = collisionBounce; // higher = more sliding / chaos with coffee
                     
                     bubble.vx += nx * bounceStrength;
                     bubble.vy += ny * bounceStrength;
@@ -562,14 +556,14 @@ class SkillBubbles {
                 }
             });
             
-            // Update DOM position (only for non-dragged bubbles)
+            // update DOM position (for non-dragged bubbles)
             bubble.element.style.left = (bubble.x - bubble.radius) + 'px';
             bubble.element.style.top = (bubble.y - bubble.radius) + 'px';
         });
     }
 }
 
-// Smooth 3D Project Carousel (Simplified & Stable)
+// smooth 3D project carousel (simplified & stable)
 class ProjectWheel {
     constructor() {
         this.container = document.getElementById('projectWheel');
@@ -582,7 +576,7 @@ class ProjectWheel {
         this.isAnimating = false;
         this.autoRotate = null;
         
-        // Simplified rotation properties
+        // simplified rotation properties
         this.angle = 0;
         this.targetAngle = 0;
         this.isDragging = false;
@@ -594,10 +588,10 @@ class ProjectWheel {
     }
 
     setup() {
-        // Set up 3D context
+        // set up 3D context
         this.container.style.transformStyle = 'preserve-3d';
         
-        // Position items in a circle
+        // position items in a circle
         const radius = 350;
         const angleStep = (Math.PI * 2) / this.total;
         
@@ -612,21 +606,21 @@ class ProjectWheel {
             item.dataset.x = x;
             item.dataset.z = z;
             
-            // Click to navigate
+            // click to navigate
             item.addEventListener('click', () => this.goTo(index));
         });
         
-        // Navigation controls
+        // navigation controls
         this.prevBtn.addEventListener('click', () => this.shift(-1)); // Previous = counter-clockwise
         this.nextBtn.addEventListener('click', () => this.shift(1));  // Next = clockwise
         this.dots.forEach((dot, i) => dot.addEventListener('click', () => this.goTo(i)));
         
-        // Click to navigate
+        // click to navigate
         this.items.forEach((item, index) => {
             item.addEventListener('click', () => this.goTo(index));
         });
         
-        // Auto rotation
+        // auto rotate
         this.startAuto();
         this.container.addEventListener('mouseenter', () => this.stopAuto());
         this.container.addEventListener('mouseleave', () => this.startAuto());
@@ -667,7 +661,7 @@ class ProjectWheel {
             
             this.container.style.cursor = 'grab';
             
-            // Snap to nearest item
+            // snap to nearest item
             const angleStep = (Math.PI * 2) / this.total;
             const nearestIndex = Math.round(-this.angle / angleStep) % this.total;
             const correctedIndex = nearestIndex < 0 ? nearestIndex + this.total : nearestIndex;
@@ -676,12 +670,12 @@ class ProjectWheel {
             this.startAuto();
         };
         
-        // Mouse events
+        // mouse events
         this.container.addEventListener('mousedown', handleStart);
         document.addEventListener('mousemove', handleMove);
         document.addEventListener('mouseup', handleEnd);
         
-        // Touch events
+        // touch events
         this.container.addEventListener('touchstart', handleStart, { passive: true });
         document.addEventListener('touchmove', handleMove, { passive: false });
         document.addEventListener('touchend', handleEnd);
@@ -689,7 +683,6 @@ class ProjectWheel {
 
     startAnimationLoop() {
         const animate = () => {
-            // Smooth interpolation to target
             if (!this.isDragging) {
                 const diff = this.targetAngle - this.angle;
                 if (Math.abs(diff) > 0.001) {
@@ -704,37 +697,37 @@ class ProjectWheel {
     }
 
     render() {
-        // Predefined positions and rotations for 5 positions
+        // predefined positions and rotations for 5 positions
         const positions = [
-            { x: 0, z: 350, angle: 0 },      // Center front
-            { x: 240, z: 280, angle: -45 },  // Right
-            { x: 380, z: 100, angle: -75 },  // Far right
-            { x: -380, z: 100, angle: 75 },  // Far left
-            { x: -240, z: 280, angle: 45 }   // Left
+            { x: 0, z: 350, angle: 0 },      // center
+            { x: 240, z: 280, angle: -45 },  // right
+            { x: 380, z: 100, angle: -75 },  // far right
+            { x: -380, z: 100, angle: 75 },  // far left
+            { x: -240, z: 280, angle: 45 }   // left
         ];
         
         const opacities = [1, 0.8, 0.4, 0.4, 0.8];
         const scales = [0.75, 0.65, 0.5, 0.5, 0.65];
         
-        // Create array of card indices in current display order
+        // create array of card indices in current display order
         const cardOrder = [];
         for (let i = 0; i < this.total; i++) {
             cardOrder.push((this.current + i) % this.total);
         }
         
-        // Apply positions to cards based on their order
+        // apply positions to cards based on their order
         this.items.forEach((item, cardIndex) => {
             const positionIndex = cardOrder.indexOf(cardIndex);
             
             if (positionIndex < positions.length) {
-                // Card is visible - use predefined position
+                // card is visible - use predefined position
                 const pos = positions[positionIndex];
                 item.style.transform = `translate(-50%, -50%) translate3d(${pos.x}px, 0, ${pos.z}px) rotateY(${pos.angle}deg) scale(${scales[positionIndex]})`;
                 item.style.opacity = opacities[positionIndex];
                 item.style.filter = `brightness(${opacities[positionIndex]})`;
                 item.style.zIndex = positions.length - positionIndex;
             } else {
-                // Card is hidden behind
+                // card is hidden behind
                 item.style.transform = `translate(-50%, -50%) translate3d(0, 0, -200px) scale(0.5)`;
                 item.style.opacity = 0;
                 item.style.filter = 'brightness(0.5)';
@@ -742,10 +735,10 @@ class ProjectWheel {
             }
         });
         
-        // Update dots
+        // update dots
         this.dots.forEach((dot, i) => dot.classList.toggle('active', i === this.current));
         
-        // Update focused state
+        // update focused state
         this.items.forEach((item, i) => {
             item.classList.toggle('focused', i === this.current);
         });
@@ -788,7 +781,7 @@ class ProjectWheel {
     }
 }
 
-// Contact Form Handler
+// contact form handler
 class ContactForm {
     constructor() {
         this.form = document.querySelector('.contact-form');
@@ -798,14 +791,12 @@ class ContactForm {
     init() {
         if (this.form) {
             this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-            // Auto-resize textarea (live responsive height)
             const msg = this.form.querySelector('textarea#message');
             if (msg) {
                 const autoSize = () => {
                     msg.style.height = 'auto';
-                    // Clamp to a reasonable max (40vh) then allow scroll
                     const max = Math.round(window.innerHeight * 0.4);
-                    const needed = msg.scrollHeight + 2; // +2 for border compensation
+                    const needed = msg.scrollHeight + 2;
                     if (needed < max) {
                         msg.style.overflowY = 'hidden';
                         msg.style.height = needed + 'px';
@@ -815,7 +806,7 @@ class ContactForm {
                     }
                 };
                 ['input','change'].forEach(ev => msg.addEventListener(ev, autoSize));
-                // Initial sizing after load
+                // initial sizing after load
                 setTimeout(autoSize, 0);
             }
         }
@@ -837,7 +828,7 @@ class ContactForm {
             statusEl.classList.add(ok ? 'success' : 'error');
         };
 
-        // Honeypot bot trap
+        // honeypot bot trap
         if (honeypot) { return; }
 
         if (!name || !email || !message) {
@@ -857,7 +848,7 @@ class ContactForm {
         setStatus('Sending...', true);
 
         try {
-            // Add subject hidden field if not present
+            // add subject hidden field if not present
             if (!this.form.querySelector('input[name="_subject"]')) {
                 const subj = document.createElement('input');
                 subj.type = 'hidden';
@@ -866,7 +857,7 @@ class ContactForm {
                 this.form.appendChild(subj);
             }
 
-            // Build payload: prefer FormData to keep compatibility (attachments later)
+            // build payload: prefer FormData to keep compatibility (attachments later)
             const response = await fetch(this.form.action || 'https://formspree.io/f/mblkeoov', {
                 method: 'POST',
                 headers: { 'Accept': 'application/json' },
@@ -877,7 +868,7 @@ class ContactForm {
                 setStatus('Thank you! Your message has been sent.', true);
                 this.form.reset();
             } else {
-                // Attempt to parse JSON error
+                // attempt to parse JSON error
                 let errMsg = 'Send failed. Please try again later.';
                 try {
                     const data = await response.json();
@@ -891,20 +882,16 @@ class ContactForm {
     }
 }
 
-// Typing Effect for Hero Section
+// typing effect
 function startTypingEffect() {
-    // ---- NEW IMPLEMENTATION (clean slate) ----
-    // Idempotent: cancel previous run if exists
     if (window.__typingCleanup) window.__typingCleanup();
 
-    // Root mount element (was missing causing silent failure)
     const root = document.querySelector('.typing-text');
     if (!root) {
         console.warn('Typing effect root .typing-text not found');
         return;
     }
 
-    // Typing speed: 250 wpm ≈ 4 chars/sec ≈ 15ms per char (faster than before)
     const FAST_SPEED = 15; // ms per char
     const lines = [
         { text: "Hi, I'm Davis Parlour,", tag: 'h1', cls: 'hero-title', speed: FAST_SPEED, cursor: 'gradient' },
@@ -916,28 +903,22 @@ function startTypingEffect() {
     function later(fn, ms){ const id = setTimeout(fn, ms); timeouts.push(id); return id; }
     window.__typingCleanup = () => { timeouts.forEach(clearTimeout); if (cursor && cursor.remove) cursor.remove(); };
 
-    // SINGLE cursor element reused
     const cursor = document.createElement('span');
     cursor.id = 'typing-cursor';
-    // Removed '|' glyph so only the styled span shows (prevents apparent double cursor)
     cursor.textContent = '';
     const applyCursorMode = (mode) => {
         cursor.className = mode === 'gradient' ? 'typing-cursor' : 'typing-cursor-normal';
     };
 
     root.innerHTML = '';
-    // Pre-create placeholder elements for each line so vertical space is reserved and order fixed.
-    // This avoids any reflow nudge when subsequent lines begin typing.
     const placeholders = [];
     lines.forEach(l => {
         const el = document.createElement(l.tag);
         el.className = l.cls + ' typing-placeholder';
-        // Use a non-breaking space to reserve line height; keep visibility so margins apply
         el.innerHTML = '&nbsp;';
         root.appendChild(el);
         placeholders.push(el);
     });
-    // Ensure root is top-aligned and doesn't collapse while typing
     root.style.display = 'flex';
     root.style.flexDirection = 'column';
     root.style.alignItems = 'flex-start';
@@ -951,7 +932,6 @@ function startTypingEffect() {
     function startLine() {
         const line = lines[lineIndex];
         activeEl = placeholders[lineIndex];
-        // Clear placeholder content (remove &nbsp;)
         activeEl.textContent = '';
         activeText = document.createTextNode('');
         activeEl.appendChild(activeText);
@@ -966,13 +946,13 @@ function startTypingEffect() {
         if (charIndex <= line.text.length) {
             activeText.nodeValue = line.text.slice(0, charIndex);
             if (charIndex === line.text.length) {
-                // Finish line, move cursor out temporarily (so it doesn't duplicate when next line starts)
+                // finish line, move cursor out temporarily (so it doesn't duplicate when next line starts)
                 cursor.remove();
                 lineIndex++;
                 if (lineIndex < lines.length) {
                     later(startLine, 400);
                 } else {
-                    // Proceed to buttons
+                    // proceed to buttons
                     later(showButtons, 500);
                 }
                 return;
@@ -983,7 +963,7 @@ function startTypingEffect() {
     }
 
     function showButtons() {
-        // Step 1: Type out pseudo code for the buttons (so viewer sees "writing code")
+        // type out pseudo code for the buttons
         const codeBlock = document.createElement('pre');
         codeBlock.className = 'code-block typing-buttons-code';
         root.appendChild(codeBlock);
@@ -995,24 +975,24 @@ function startTypingEffect() {
         const fullCode = codeLines.join('\n');
         let codeIndex = 0;
 
-        // Place cursor inside code block for this phase
+        // place cursor inside code block
         applyCursorMode('normal');
         codeBlock.appendChild(cursor);
 
         function typeCodeChar() {
             if (codeIndex <= fullCode.length) {
-                // Update displayed code (textContent ensures HTML is escaped)
+                // update displayed code (textContent ensures HTML is escaped)
                 const current = fullCode.slice(0, codeIndex);
-                // Keep cursor always at end by removing and re-appending
+                // keep cursor always at end by removing and re-appending
                 cursor.remove();
                 codeBlock.textContent = current;
                 codeBlock.appendChild(cursor);
                 codeIndex++;
-                later(typeCodeChar, 10); // much faster code typing
+                later(typeCodeChar, 10);
             } else {
-                // Finished typing code
+                // finished typing code
                 cursor.remove();
-                // Fade out the code, then show real buttons
+                // fade code, then show buttons
                 codeBlock.classList.add('fade-out');
                 later(() => {
                     codeBlock.remove();
@@ -1023,7 +1003,7 @@ function startTypingEffect() {
 
         typeCodeChar();
 
-        // Step 2: After code typed & removed, render actual interactive buttons
+        // after code typing finished, show buttons
         function revealRealButtons() {
             const container = document.createElement('div');
             container.className = 'hero-buttons';
@@ -1051,6 +1031,7 @@ function startTypingEffect() {
         }
     }
 
+    // cool little thing where "I" go back and fix punctuation in real-time
     function fixPunctuation() {
         const first = root.querySelector('.hero-title');
         if (!first) return;
@@ -1059,7 +1040,7 @@ function startTypingEffect() {
             applyCursorMode('gradient');
             first.appendChild(cursor);
             const base = first.textContent.slice(0, -1);
-            first.textContent = base; // remove comma instantly
+            first.textContent = base;
             later(() => {
                 first.textContent = base + '.';
                 cursor.remove();
@@ -1067,11 +1048,9 @@ function startTypingEffect() {
         }
     }
 
-    // Kickoff
     startLine();
 }
 
-// Parallax Effect for Hero Section
 function parallaxEffect() {
     const scrolled = window.pageYOffset;
     const heroElements = document.querySelectorAll('.floating-element');
@@ -1083,7 +1062,7 @@ function parallaxEffect() {
     });
 }
 
-// Add CSS animation for bubble entrance
+// CSS animation for bubble entrance
 const style = document.createElement('style');
 style.textContent = `
     .skill-bubble {
@@ -1112,17 +1091,17 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize everything when DOM is loaded
+// initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new SkillBubbles();
     new ProjectWheel();
     new ContactForm();
     
-    // Start typing effect after a short delay
-    setTimeout(startTypingEffect, 1000);
+    // start typing effect after delay of 500ms
+    setTimeout(startTypingEffect, 500);
 });
 
-// Konami Code Easter Egg
+// konami code easter egg
 let konamiCode = [];
 const konamiSequence = [
     'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -1136,7 +1115,7 @@ document.addEventListener('keydown', (e) => {
     
     if (konamiCode.length === konamiSequence.length && 
         konamiCode.every((code, index) => code === konamiSequence[index])) {
-        // Easter egg activated!
+        // easter egg activated
         document.body.style.animation = 'rainbow 2s ease-in-out infinite';
         setTimeout(() => {
             document.body.style.animation = '';
@@ -1144,7 +1123,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Add rainbow animation CSS
+// add rainbow CSS
 const rainbowStyle = document.createElement('style');
 rainbowStyle.textContent = `
     @keyframes rainbow {
@@ -1157,7 +1136,7 @@ rainbowStyle.textContent = `
 `;
 document.head.appendChild(rainbowStyle);
 
-// Performance optimization: Debounce scroll events
+// performance optimization: debounce scroll events
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -1170,7 +1149,5 @@ function debounce(func, wait) {
     };
 }
 
-// Apply debouncing to scroll-heavy functions
+// apply debouncing to scroll-heavy functions
 window.addEventListener('scroll', debounce(parallaxEffect, 10));
-
-
