@@ -904,10 +904,12 @@ function startTypingEffect() {
         return;
     }
 
+    // Typing speed: 250 wpm ≈ 4 chars/sec ≈ 15ms per char (faster than before)
+    const FAST_SPEED = 15; // ms per char
     const lines = [
-        { text: "Hi, I'm Davis Parlour,", tag: 'h1', cls: 'hero-title', speed: 85, cursor: 'gradient' },
-    { text: 'Software Engineer.', tag: 'p', cls: 'hero-subtitle', speed: 65, cursor: 'normal' },
-    { text: 'First-Class BSc Computer Science graduate with a passion for solving complex problems, experience in system architecture, embedded systems, and collaborative software development.', tag: 'p', cls: 'hero-description', speed: 20, cursor: 'normal' }
+        { text: "Hi, I'm Davis Parlour,", tag: 'h1', cls: 'hero-title', speed: FAST_SPEED, cursor: 'gradient' },
+        { text: 'Software Engineer.', tag: 'p', cls: 'hero-subtitle', speed: FAST_SPEED, cursor: 'normal' },
+        { text: 'First-Class BSc Computer Science graduate with a passion for solving complex problems, experience in system architecture, embedded systems, and collaborative software development.', tag: 'p', cls: 'hero-description', speed: FAST_SPEED, cursor: 'normal' }
     ];
 
     const timeouts = [];
@@ -1006,7 +1008,7 @@ function startTypingEffect() {
                 codeBlock.textContent = current;
                 codeBlock.appendChild(cursor);
                 codeIndex++;
-                later(typeCodeChar, 25); // speed for code typing
+                later(typeCodeChar, 10); // much faster code typing
             } else {
                 // Finished typing code
                 cursor.remove();
