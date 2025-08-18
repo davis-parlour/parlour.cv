@@ -238,15 +238,15 @@ class SkillBubbles {
         ];
         
         const rect = this.container.getBoundingClientRect();
-        const colors = [
-            // primary theme colors (cyan/blue variants)
-            '#0077bb', '#00d4ff',
-            // secondary theme colors (pink/magenta variants) 
-            '#bb1177', '#ff4de3',
-            // purple variants (complementary to cyan/pink)
-            '#8811cc', '#cc33ff',
-            // accent colors (teal variants)
-            '#008080', '#40E0D0'
+        
+        const gradientPalette = [
+            ['#00d4ff', '#0090ff'],
+            ['#5dd6ff', '#0077ff'],
+            ['#6a8bff', '#4f46e5'],
+            ['#8b5cf6', '#6366f1'],
+            ['#d946ef', '#c026d3'],
+            ['#ec4899', '#db2777'],
+            ['#0ea5e9', '#0284c7'],
         ];
         
         skills.forEach((skill, i) => {
@@ -262,7 +262,7 @@ class SkillBubbles {
                 vx: (Math.random() - 0.5) * 2,
                 vy: (Math.random() - 0.5) * 2,
                 radius: radius,
-                color: colors[i % colors.length],
+                color: gradientPalette[i % gradientPalette.length],
                 skill: skill,
                 element: null,
                 isDragging: false
@@ -273,7 +273,13 @@ class SkillBubbles {
             el.className = 'skill-bubble';
             el.textContent = skill;
             el.style.width = el.style.height = (bubble.radius * 2) + 'px';
-            el.style.background = bubble.color;
+            // Apply gradient background for smoother, complementary appearance
+            if (Array.isArray(bubble.color)) {
+                el.style.background = `linear-gradient(135deg, ${bubble.color[0]}, ${bubble.color[1]})`;
+            } else {
+                el.style.background = bubble.color; // fallback
+            }
+            el.style.border = '1px solid rgba(255,255,255,0.12)';
             el.style.position = 'absolute';
             el.style.left = (bubble.x - bubble.radius) + 'px';
             el.style.top = (bubble.y - bubble.radius) + 'px';
@@ -1087,7 +1093,6 @@ document.addEventListener('DOMContentLoaded', () => {
     new SkillBubbles();
     new ProjectWheel();
     new ContactForm();
-    
     // start typing effect after delay of 500ms
     setTimeout(startTypingEffect, 500);
 });
@@ -1103,13 +1108,20 @@ const konamiSequence = [
 document.addEventListener('keydown', (e) => {
     konamiCode.push(e.code);
     konamiCode = konamiCode.slice(-konamiSequence.length);
-    
-    if (konamiCode.length === konamiSequence.length && 
+
+    if (konamiCode.length === konamiSequence.length &&
         konamiCode.every((code, index) => code === konamiSequence[index])) {
-        // easter egg activated
-        document.body.style.animation = 'rainbow 2s ease-in-out infinite';
+        // easter egg activated (avoid filtering entire body to keep navbar solid)
+        let overlay = document.getElementById('rainbowOverlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'rainbowOverlay';
+            document.body.appendChild(overlay);
+        }
+        document.body.classList.add('rainbow-active');
+        // auto remove after 5s
         setTimeout(() => {
-            document.body.style.animation = '';
+            document.body.classList.remove('rainbow-active');
         }, 5000);
     }
 });
@@ -1142,3 +1154,4 @@ function debounce(func, wait) {
 
 // apply debouncing to scroll-heavy functions
 window.addEventListener('scroll', debounce(parallaxEffect, 10));
+
