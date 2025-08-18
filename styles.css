@@ -1639,7 +1639,9 @@ body {
         pointer-events: none;
 }
 @media (max-width: 768px) {
-    .about { --about-grid-cutoff-height: 140px; }
+    /* reduce cutoff height so grid appears to extend fully on mobile */
+    .about { --about-grid-cutoff-height: 8px; }
+    .about-grid-wrapper::after { height: 8px; border-top: 1px solid rgba(0,150,220,0.28); }
 }
 .about .container, .about-content, .about-text { position:relative; z-index:6; }
 /* ensure stats specifically stay above grid highlight */

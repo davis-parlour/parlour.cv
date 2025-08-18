@@ -1107,6 +1107,45 @@ document.addEventListener('DOMContentLoaded', () => {
     new ContactForm();
     // start typing effect after delay of 500ms
     setTimeout(startTypingEffect, 500);
+
+    // refine about section so there's only a small consistent gap after stats on mobile (reduce empty space)
+    function adjustAboutLayout(attempt=0){
+        const about = document.getElementById('about');
+        if(!about) return;
+        const stats = about.querySelector('.about-stats');
+        const isMobile = window.innerWidth <= 768;
+        // clear any previous height overrides
+        about.style.minHeight = '';
+        if(!isMobile || !stats) {
+            // reset cutoff height closer to desktop default
+            about.style.setProperty('--about-grid-cutoff-height','2px');
+            return;
+        }
+        const aboutRect = about.getBoundingClientRect();
+        const statsRect = stats.getBoundingClientRect();
+        const sectionHeight = about.offsetHeight; // current rendered height
+        const distanceBottomOfStatsFromTop = statsRect.bottom - aboutRect.top;
+        const desiredSpacingAfterStats = 20; 
+        
+        let cutoff = sectionHeight - distanceBottomOfStatsFromTop - desiredSpacingAfterStats;
+        
+        if(cutoff < 4){
+            cutoff = 8;
+            const neededExtra = distanceBottomOfStatsFromTop + desiredSpacingAfterStats + cutoff - sectionHeight;
+            if(neededExtra > 0){
+                const currentPadBottom = parseFloat(getComputedStyle(about).paddingBottom) || 0;
+                about.style.paddingBottom = (currentPadBottom + neededExtra) + 'px';
+            }
+        }
+        cutoff = Math.min(Math.max(cutoff, 8), 80); // clamp to new smaller range
+        about.style.setProperty('--about-grid-cutoff-height', cutoff + 'px');
+        if(attempt < 5){
+            requestAnimationFrame(()=>adjustAboutLayout(attempt+1));
+        }
+    }
+    adjustAboutLayout();
+    setTimeout(()=>adjustAboutLayout(), 900); // after counters kick in
+    window.addEventListener('resize', debounce(()=>adjustAboutLayout(), 120));
 });
 
 // konami code easter egg
