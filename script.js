@@ -572,7 +572,8 @@ class SkillBubbles {
     }
 }
 
-// smooth 3D project carousel (simplified & stable)
+// 3D project carousel
+const PROJECT_WHEEL_ROTATE_MS = 14000;
 class ProjectWheel {
     constructor() {
         this.container = document.getElementById('projectWheel');
@@ -620,8 +621,8 @@ class ProjectWheel {
         });
         
         // navigation controls
-        this.prevBtn.addEventListener('click', () => this.shift(-1)); // Previous = counter-clockwise
-        this.nextBtn.addEventListener('click', () => this.shift(1));  // Next = clockwise
+        this.prevBtn.addEventListener('click', () => this.shift(-1));
+        this.nextBtn.addEventListener('click', () => this.shift(1)); 
         this.dots.forEach((dot, i) => dot.addEventListener('click', () => this.goTo(i)));
         
         // click to navigate
@@ -779,7 +780,7 @@ class ProjectWheel {
             if (!this.isDragging && !this.isAnimating) {
                 this.shift(1);
             }
-        }, 8000);
+        }, PROJECT_WHEEL_ROTATE_MS);
     }
 
     stopAuto() {
