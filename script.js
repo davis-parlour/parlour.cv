@@ -240,22 +240,13 @@ class SkillBubbles {
         const rect = this.container.getBoundingClientRect();
         const colors = [
             // primary theme colors (cyan/blue variants)
-            '#00d4ff', '#1ac6ff', '#33b8ff', '#4daaff', '#669cff',
-            '#0099cc', '#00aadd', '#00bbee', '#1199dd', '#2288cc',
-            '#0077bb', '#0088cc', '#1177bb', '#2266aa', '#3355aa',
-            
+            '#0077bb', '#00d4ff',
             // secondary theme colors (pink/magenta variants) 
-            '#ff00c8', '#ff1ad1', '#ff33da', '#ff4de3', '#ff66ec',
-            '#dd0099', '#ee00aa', '#ff00bb', '#dd1199', '#cc2288',
-            '#bb1177', '#aa0088', '#cc1199', '#dd22aa', '#ee33bb',
-            
+            '#bb1177', '#ff4de3',
             // purple variants (complementary to cyan/pink)
-            '#aa00ff', '#bb1aff', '#cc33ff', '#9900dd', '#8800cc',
-            '#7700bb', '#8811cc', '#9922dd', '#aa33ee', '#bb44ff',
-            
-            // accent colors (warm variants)
-            '#ff6b47', '#ff7a56', '#ff8965', '#ff9874', '#ffa783',
-            '#ff5533', '#ff6644', '#ff7755', '#ff8866', '#ff9977'
+            '#8811cc', '#cc33ff',
+            // accent colors (teal variants)
+            '#008080', '#40E0D0'
         ];
         
         skills.forEach((skill, i) => {
@@ -770,7 +761,7 @@ class ProjectWheel {
             if (!this.isDragging && !this.isAnimating) {
                 this.shift(1);
             }
-        }, 5000);
+        }, 8000);
     }
 
     stopAuto() {

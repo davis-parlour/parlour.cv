@@ -1,6 +1,6 @@
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .project-wheel-container {
-        padding: 0 20px;
+        padding: 0;
         max-width: 100vw;
         overflow: visible;
         position: relative;
@@ -19,8 +19,8 @@
         justify-content: flex-start;
     }
     .project-item {
-        width: calc(100% - 40px) !important;
-        max-width: 350px !important;
+        width: 90vw !important;
+        max-width: 450px !important;
         min-height: 420px !important;
         height: auto !important;
         margin: 0 auto 1.2rem auto !important;
@@ -45,8 +45,8 @@
         display: flex;
         pointer-events: auto;
         z-index: 10;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
+        border-color: rgba(0, 212, 255, 0.4);
         background: rgba(24, 26, 34, 0.7);
     }
     .wheel-controls {
@@ -56,51 +56,49 @@
         justify-content: center;
         align-items: center;
     }
-    .typing-text {
-        .wheel-btn {
-            width: 56px;
-            height: 56px;
-            font-size: 1.4rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            touch-action: manipulation;
-        }
-        .wheel-btn:hover, .wheel-btn:active {
-            background: rgba(0, 212, 255, 0.3);
-            border-color: #00d4ff;
-            transform: translateY(-2px);
-        }
-        .wheel-dots {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-        .wheel-dot {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        .wheel-dot:hover {
-            background: rgba(255, 255, 255, 0.5);
-            transform: scale(1.1);
-        }
-        .wheel-dot.active {
-            background: #ffffff;
-            transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-        }
+    .wheel-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 1.4rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        touch-action: manipulation;
+    }
+    .wheel-btn:hover, .wheel-btn:active {
+        background: rgba(0, 212, 255, 0.3);
+        border-color: #00d4ff;
+        transform: translateY(-2px);
+    }
+    .wheel-dots {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+    .wheel-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    .wheel-dot:hover {
+        background: rgba(255, 255, 255, 0.5);
+        transform: scale(1.1);
+    }
+    .wheel-dot.active {
+        background: #ffffff;
+        transform: scale(1.2);
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
     }
     .project-card {
         min-height: 0;
@@ -186,10 +184,6 @@
         padding-left: 1rem;
         padding-right: 1rem;
     }
-    /* Remove any horizontal scroll on mobile */
-    body, html {
-        overflow-x: hidden !important;
-    }
     /* Hide any overflow from project wheel */
     .project-wheel {
         overflow-x: visible !important;
@@ -252,7 +246,6 @@ body {
     background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
     color: #ffffff;
     line-height: 1.7;
-    overflow-x: hidden;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -361,9 +354,24 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     align-items: center;
+    position: relative;
+}
+
+.hero-content {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    z-index: 10;
+    position: relative;
+    text-align: center;
+}
+
+.hero-animation {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    z-index: 1;
 }
 
 .hero-title {
@@ -896,7 +904,7 @@ body {
     z-index: 1;
     will-change: transform, border-radius;
     overflow: visible;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     font-feature-settings: "kern" 1;
 }
 
@@ -1547,67 +1555,4 @@ body {
         justify-content: center;
     }
 
-    /* Project Wheel Mobile */
-    .project-wheel-container {
-        perspective: 800px;
-    }
-
-    .project-wheel {
-        width: 400px;
-        height: 400px;
-    }
-
-    .project-item {
-        width: 280px;
-        height: 350px;
-    }
-
-    .project-item[data-index="0"] {
-        transform: translate(-50%, -50%) rotateY(0deg) translateZ(200px);
-    }
-
-    .project-item[data-index="1"] {
-        transform: translate(-50%, -50%) rotateY(72deg) translateZ(200px);
-    }
-
-    .project-item[data-index="2"] {
-        transform: translate(-50%, -50%) rotateY(144deg) translateZ(200px);
-    }
-
-    .project-item[data-index="3"] {
-        transform: translate(-50%, -50%) rotateY(216deg) translateZ(200px);
-    }
-
-    .project-item[data-index="4"] {
-        transform: translate(-50%, -50%) rotateY(288deg) translateZ(200px);
-    }
-
-    .project-item.focused {
-        transform: translate(-50%, -50%) rotateY(0deg) translateZ(250px) scale(1.05);
-    }
-
-    .project-content {
-        padding: 1.2rem;
-    }
-
-    .project-content h3 {
-        font-size: 1.2rem;
-        margin-bottom: 0.6rem;
-    }
-
-    .project-content p {
-        font-size: 0.85rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .tech-tag {
-        font-size: 0.7rem;
-        padding: 2px 8px;
-    }
-
-    .project-link {
-        width: 32px;
-        height: 32px;
-        font-size: 0.8rem;
-    }
 }
