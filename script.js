@@ -1,17 +1,29 @@
-// mobile Navigation Toggle
+// mobile Navigation Toggle (guard against missing element)
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (hamburger && navMenu) {
+    const toggleMenu = () => {
+        const isActive = hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', String(isActive));
+    };
+    hamburger.addEventListener('click', toggleMenu);
+    // keyboard support for accessibility
+    hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleMenu();
+        }
+    });
 
-// close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-}));
+    // close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+    }));
+}
 
 // smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -238,7 +250,7 @@ class SkillBubbles {
         ];
         
         const rect = this.container.getBoundingClientRect();
-        
+
         const gradientPalette = [
             ['#00d4ff', '#0090ff'],
             ['#5dd6ff', '#0077ff'],
