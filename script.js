@@ -600,6 +600,12 @@ class ProjectWheel {
     setup() {
         // set up 3D context
         this.container.style.transformStyle = 'preserve-3d';
+        // make container focusable for keyboard navigation
+        if (!this.container.hasAttribute('tabindex')) {
+            this.container.setAttribute('tabindex', '0');
+        }
+        this.container.setAttribute('role', 'region');
+        this.container.setAttribute('aria-label', 'Projects Carousel');
         
         // position items in a circle
         const radius = 350;
@@ -634,6 +640,21 @@ class ProjectWheel {
         this.startAuto();
         this.container.addEventListener('mouseenter', () => this.stopAuto());
         this.container.addEventListener('mouseleave', () => this.startAuto());
+
+        // keyboard navigation (arrow keys & home/end)
+        this.container.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') { e.preventDefault(); this.shift(-1); this.stopAuto(); }
+            else if (e.key === 'ArrowRight') { e.preventDefault(); this.shift(1); this.stopAuto(); }
+            else if (e.key === 'Home') { e.preventDefault(); this.goTo(0); this.stopAuto(); }
+            else if (e.key === 'End') { e.preventDefault(); this.goTo(this.total - 1); this.stopAuto(); }
+        });
+
+        // allow arrow key navigation globally when focus not in input/textarea
+        document.addEventListener('keydown', (e) => {
+            if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+            if (e.key === 'ArrowLeft') { this.shift(-1); this.stopAuto(); }
+            else if (e.key === 'ArrowRight') { this.shift(1); this.stopAuto(); }
+        });
     }
 
     addDragControls() {
@@ -1104,7 +1125,8 @@ document.head.appendChild(style);
 // initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new SkillBubbles();
-    new ProjectWheel();
+    // store reference globally for potential future enhancements
+    window.__projectWheel = new ProjectWheel();
     new ContactForm();
     // start typing effect after delay of 500ms
     setTimeout(startTypingEffect, 500);
@@ -1149,47 +1171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', debounce(()=>adjustAboutLayout(), 120));
 });
 
-// konami code easter egg
-let konamiCode = [];
-const konamiSequence = [
-    'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-    'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-    'KeyB', 'KeyA'
-];
-
-document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.code);
-    konamiCode = konamiCode.slice(-konamiSequence.length);
-
-    if (konamiCode.length === konamiSequence.length &&
-        konamiCode.every((code, index) => code === konamiSequence[index])) {
-        // easter egg activated (avoid filtering entire body to keep navbar solid)
-        let overlay = document.getElementById('rainbowOverlay');
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.id = 'rainbowOverlay';
-            document.body.appendChild(overlay);
-        }
-        document.body.classList.add('rainbow-active');
-        // auto remove after 5s
-        setTimeout(() => {
-            document.body.classList.remove('rainbow-active');
-        }, 5000);
-    }
-});
-
-// add rainbow CSS
-const rainbowStyle = document.createElement('style');
-rainbowStyle.textContent = `
-    @keyframes rainbow {
-        0% { filter: hue-rotate(0deg); }
-        25% { filter: hue-rotate(90deg); }
-        50% { filter: hue-rotate(180deg); }
-        75% { filter: hue-rotate(270deg); }
-        100% { filter: hue-rotate(360deg); }
-    }
-`;
-document.head.appendChild(rainbowStyle);
+// NOTE: Konami code easter egg removed per request.
 
 // performance optimization: debounce scroll events
 function debounce(func, wait) {

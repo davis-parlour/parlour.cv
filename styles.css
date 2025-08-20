@@ -184,7 +184,6 @@
         padding-left: 1rem;
         padding-right: 1rem;
     }
-    /* Hide any overflow from project wheel */
     .project-wheel {
         overflow-x: visible !important;
     }
@@ -218,7 +217,7 @@
         padding-right: 1rem;
     }
 }
-/* Reset and Base Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -230,7 +229,6 @@ html {
     font-size: 16px;
 }
 
-/* Typography optimization */
 h1, h2, h3, h4, h5, h6 {
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1;
     -webkit-font-smoothing: antialiased;
@@ -339,7 +337,6 @@ body {
     transition: 0.3s;
 }
 
-/* Hero Section */
 .hero {
     height: 100vh;
     display: flex;
@@ -399,7 +396,7 @@ body {
     display: inline-block;
     background: linear-gradient(45deg, #00d4ff, #ff00c8, #9d4edd);
     width: 3px;
-    height: 1em; /* ensure visible without text content */
+    height: 1em;
     animation: blink 1s infinite;
 }
 
@@ -407,7 +404,7 @@ body {
     display: inline-block;
     background: #ffffff;
     width: 2px;
-    height: 1em; /* ensure visible without text content */
+    height: 1em;
     animation: blink 1s infinite;
 }
 
@@ -520,7 +517,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Floating Animation */
 .hero-animation {
     position: relative;
     height: 400px;
@@ -617,7 +613,6 @@ body {
     }
 }
 
-/* Section Headers */
 .section-header {
     text-align: center;
     margin-bottom: 3.2rem;
@@ -651,12 +646,10 @@ body {
     letter-spacing: -0.01em;
 }
 
-/* Tighter spacing specifically for skills section controls */
 #skills .section-header { margin-bottom: 1.8rem; }
 #skills .section-subtitle { margin-top: 0.4rem; margin-bottom: 0.9rem; }
 #skills .coffee-controls { margin-top: -0.25rem; }
 
-/* About Section */
 .about {
     padding: 74.5px 0;
     background: rgba(255, 255, 255, 0.02);
@@ -705,7 +698,6 @@ body {
     font-size: 0.9rem;
 }
 
-/* Skills Section */
 .skills {
     padding: 100px 0;
 }
@@ -736,7 +728,6 @@ body {
     backdrop-filter: blur(6px);
 }
 
-/* New separated coffee control layout */
 .coffee-controls { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
 
 .coffee-slider-card, .coffee-level-card { position:relative; min-width:160px; padding:0.55rem 0.75rem 0.6rem; border-radius:16px; background:#141516; border:1px solid rgba(255,255,255,0.07); box-shadow:0 2px 8px -4px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,0.03) inset; backdrop-filter:blur(6px) saturate(120%); -webkit-backdrop-filter:blur(6px) saturate(120%); overflow:hidden; }
@@ -785,11 +776,9 @@ body {
     box-shadow: 0 0 4px rgba(0,212,255,0.55), 0 0 10px rgba(255,0,200,0.35);
     opacity: 0.9;
 }
-/* Removed decorative underline & dot per request */
 .coffee-label:before,
 .coffee-label:after { display: none !important; }
 
-/* Rainbow border when cups are Too Many */
 .coffee-level-card.coffee-overload { box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset; }
 .coffee-level-card.coffee-overload:before {
     content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
@@ -908,7 +897,6 @@ body {
     font-feature-settings: "kern" 1;
 }
 
-/* Liquid / soap-bubble visual enhancements for .skill-bubble */
 .skill-bubble::before {
     content: '';
     position: absolute;
@@ -916,7 +904,6 @@ body {
     border-radius: inherit;
     pointer-events: none;
 
-    /* layered iridescent sheen */
     background-image: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.22), rgba(255,255,255,0.06) 8%, transparent 18%),
                       radial-gradient(circle at 70% 75%, rgba(180,240,255,0.06), rgba(255,180,255,0.02) 12%, transparent 35%),
                       linear-gradient(120deg, rgba(255,255,255,0.03), rgba(0,0,0,0.02));
@@ -927,7 +914,6 @@ body {
     will-change: transform, filter, opacity;
 }
 
-/* Thin seam where two bubbles touch. Uses CSS variables set by JS. */
 .skill-bubble::after {
     content: '';
     position: absolute;
@@ -945,28 +931,25 @@ body {
     will-change: transform, opacity;
 }
 
-/* When JS marks touching, position and show the seam */
 .skill-bubble.touching::after {
     opacity: 1;
-    /* translate to the contact point inside the bubble */
     transform: translate(calc(var(--touch-x, 0px)), calc(var(--touch-y, 0px))) rotate(var(--touch-angle, 0deg)) translate(-50%, -50%);
 }
 
-/* Liquid ripple: small pulsing of the sheen pseudo-element to simulate gel vibration */
+/* not used right now, but will be later (WIP) - ripple effect */
+
 .skill-bubble.liquid::before {
     transform: scale(var(--liquid-scale, 1));
     filter: blur(calc(var(--liquid-intensity, 0.02) * 6px));
     opacity: 1;
 }
 
-/* Slight wobble on the element when liquid class is present (subtle) */
 .skill-bubble.liquid {
-    /* do not override translate3d positioning; use a very small drop-shadow change + subtle border-color */
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06), 0 6px 18px rgba(0,0,0,0.04);
     transition: box-shadow 420ms cubic-bezier(.22,1,.36,1), border-radius 420ms ease;
 }
 
-/* Optional stronger ripple animation (used for more pronounced effects) */
+
 @keyframes liquid-ripple {
     0% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.04); opacity: 0.95; }
@@ -977,20 +960,17 @@ body {
     animation: liquid-ripple 520ms cubic-bezier(.22,1,.36,1);
 }
 
-/* small performance hint: reduce paint cost on low-power devices */
 @media (prefers-reduced-motion: reduce) {
     .skill-bubble::before, .skill-bubble::after, .skill-bubble.liquid { transition: none; animation: none; filter: none; }
 }
 
 .skill-bubble:hover {
-    /* Remove scale-up on hover; add subtle glow */
     transform: none;
     box-shadow: 0 12px 35px rgba(0, 212, 255, 0.06), 0 6px 18px rgba(0, 212, 255, 0.04);
 }
 
 .skill-bubble:active {
     cursor: grabbing;
-    /* Slight visual press but no scale */
     transform: translateY(1px);
 }
 
@@ -1043,7 +1023,6 @@ body {
     }
 }
 
-/* Projects Section */
 .projects {
     padding: 100px 0;
     background: rgba(255, 255, 255, 0.02);
@@ -1052,11 +1031,11 @@ body {
 .project-wheel-container {
     max-width: 1200px;
     margin: 0 auto;
-    perspective: 1000px;
+    perspective: 1200px;
     perspective-origin: center center;
     position: relative;
     overflow: hidden;
-    padding: 40px 0;
+    padding: 20px 0;
 }
 
 .project-wheel {
@@ -1079,7 +1058,7 @@ body {
 .project-item {
     position: absolute;
     width: 320px;
-    height: 380px; /* reverted to previous taller height */
+    height: 380px;
     top: 50%;
     left: 50%;
     transform-origin: center center;
@@ -1092,13 +1071,10 @@ body {
     user-select: none;
 }
 
-/* Make sure project cards fit nicely in the new layout */
 .project-card { width: 100%; height: 100%; }
 
-/* Adjust wheel controls spacing */
 .wheel-controls { margin-top: 2rem; }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .project-item { width: 260px; height: 320px; }
 }
@@ -1149,17 +1125,16 @@ body {
     opacity: 0.7;
 }
 
-/* Project image colourful bar full width with reduced vertical height */
 .project-image {
     background: linear-gradient(45deg, #00d4ff, #ff00c8);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    height: 60px; /* keep the slimmer vertical size */
+    height: 60px; 
     width: 100%;
     padding: 0;
-    margin: 0; /* flush at top of card */
+    margin: 0;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
@@ -1609,9 +1584,7 @@ body {
 .coffee-card-negative h3 { color:#ff6b6b; }
 .coffee-card-negative .project-placeholder { color:#ff6b6b; }
 .dark .coffee-card-negative { border-color:rgba(255,90,90,.4); }
-.rainbow-active #rainbowOverlay { opacity:1; }
-#rainbowOverlay { pointer-events:none; position:fixed; inset:0; background:linear-gradient(120deg,rgba(0,212,255,0.18),rgba(255,0,200,0.18),rgba(255,230,0,0.14)); mix-blend-mode:overlay; animation: rainbowShift 4s linear infinite; opacity:0; transition:opacity .5s ease; z-index:999; }
-@keyframes rainbowShift { 0%{ filter:hue-rotate(0deg); } 100%{ filter:hue-rotate(360deg); } }
+/* Removed Konami easter egg overlay styles */
 .coffee-card-fav { border:1px solid rgba(0,170,105,0.60); box-shadow:0 0 0 1px rgba(0,170,105,0.36),0 10px 26px -12px rgba(0,170,105,0.40); }
 .coffee-card-fav h3 { color:#2faf6e; }
 .coffee-card-fav .project-placeholder { color:#2faf6e; }
