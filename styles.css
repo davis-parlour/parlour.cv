@@ -1485,6 +1485,10 @@ body {
     align-items: center;
 }
 
+.analytics-note { margin-top:1rem; font-size:clamp(0.55rem,1.15vw,0.7rem); line-height:1.1; color:#9bb8c5; opacity:0.75; letter-spacing:0.035em; white-space:nowrap; overflow:hidden; width:100%; display:block; text-align:left; }
+.analytics-note a { color:#00d4ff; text-decoration:underline; }
+.analytics-note a:hover { text-decoration:none; }
+
 .social-links {
     display: flex;
     gap: 1rem;
@@ -1565,6 +1569,7 @@ body {
         gap: 1rem;
         text-align: center;
     }
+    .analytics-note { text-align:center; white-space:normal; overflow:visible; }
 
     .hero-buttons {
         justify-content: center;
