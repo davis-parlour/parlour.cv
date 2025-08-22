@@ -141,10 +141,30 @@ class ProjectWheel{
         this.dots=Array.from(document.querySelectorAll('#wheelDots .wheel-dot'));
         this.prev=document.getElementById('wheelPrevBtn');
         this.next=document.getElementById('wheelNextBtn');
-        this.total=this.items.length; this.current=0; this.anim=false; this.timer=null;
+        this.container=document.getElementById('projectWheel');
+        this.total=this.items.length; this.current=0; this.anim=false; this.timer=null; this.pendingFocus=false;
         if(this.prev) this.prev.addEventListener('click',()=>this.shift(-1)); if(this.next) this.next.addEventListener('click',()=>this.shift(1));
         this.dots.forEach((d,i)=>d.addEventListener('click',()=>this.go(i))); this.items.forEach((it,i)=>it.addEventListener('click',()=>this.go(i)));
-        this.startAuto(); const c=document.getElementById('projectWheel'); if(c){ c.addEventListener('mouseenter',()=>this.stopAuto()); c.addEventListener('mouseleave',()=>this.startAuto()); }
+        // accessibility: make wheel focusable and describe usage
+        if(this.container){
+            this.container.setAttribute('tabindex','0');
+            this.container.setAttribute('role','region');
+            if(!this.container.getAttribute('aria-label')){
+                this.container.setAttribute('aria-label','Projects carousel. Use Left and Right arrow keys to navigate.');
+            }
+            // pause auto-rotate on focus and resume when focus leaves the wheel entirely
+            this.container.addEventListener('focusin',()=>this.stopAuto());
+            this.container.addEventListener('focusout',e=>{ if(!this.container.contains(e.relatedTarget)) this.startAuto(); });
+            // keyboard controls
+            this.container.addEventListener('keydown', e => {
+                const k=e.key;
+                if(k==='ArrowLeft' || k==='Left') { e.preventDefault(); this.pendingFocus=true; this.shift(-1); return; }
+                if(k==='ArrowRight' || k==='Right') { e.preventDefault(); this.pendingFocus=true; this.shift(1); return; }
+                if(k==='Home') { e.preventDefault(); this.pendingFocus=true; this.go(0); return; }
+                if(k==='End') { e.preventDefault(); this.pendingFocus=true; this.go(this.total-1); return; }
+            });
+        }
+        this.startAuto(); if(this.container){ this.container.addEventListener('mouseenter',()=>this.stopAuto()); this.container.addEventListener('mouseleave',()=>this.startAuto()); }
         this.render();
     }
     render(){
@@ -161,9 +181,24 @@ class ProjectWheel{
                 item.style.zIndex=pos.length-k;
             }
             else { item.style.transform='translate(-50%, -50%) translate3d(0,0,-200px) scale(0.5)'; item.style.opacity=0; item.style.filter='brightness(0.5)'; item.style.zIndex=1; }
-            item.classList.toggle('focused', idx===this.current);
+            // focused state and ARIA/roving tabindex updates
+            const isCurrent = idx===this.current;
+            item.classList.toggle('focused', isCurrent);
+            item.setAttribute('tabindex', isCurrent ? '0' : '-1');
+            item.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+            item.setAttribute('aria-hidden', isCurrent ? 'false' : 'true');
+            // label each slide for screen readers
+            const title=item.querySelector('h3')?.textContent?.trim()||`Project ${idx+1}`;
+            item.setAttribute('role','group');
+            item.setAttribute('aria-label', `${title} (${idx+1} of ${this.total})`);
         });
         this.dots.forEach((d,i)=>d.classList.toggle('active', i===this.current));
+        // move focus to the current slide if requested (e.g., via keyboard)
+        if(this.pendingFocus){
+            const cur=this.items[this.current];
+            if(cur) try{ cur.focus({preventScroll:true}); }catch{ cur.focus(); }
+            this.pendingFocus=false;
+        }
     }
     shift(dir){ if(this.anim) return; this.anim=true; this.current=(this.current+dir+this.total)%this.total; this.render(); setTimeout(()=>this.anim=false,600); }
     go(i){ if(this.anim||i===this.current) return; this.anim=true; this.current=i; this.render(); setTimeout(()=>this.anim=false,600); }
