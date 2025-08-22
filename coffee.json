@@ -1,0 +1,46 @@
+{
+  "coffees": [
+    {
+      "title": "Grind House Blend",
+      "description": "Not for me - mostly bitter and flat no matter how I pulled it.",
+      "tags": ["Bitter", "Flat"],
+      "icon": "fas fa-ban",
+      "variant": "negative",
+      "links": [
+        {
+          "href": "https://www.amazon.co.uk/Grind-Coffee-Whole-Beans-Blend/dp/B0CHG2WHRX?ref_=ast_sto_dp&th=1",
+          "ariaLabel": "Product page",
+          "icon": "fas fa-external-link-alt"
+        }
+      ]
+    },
+    {
+      "title": "Colombia Excelso Huila (Dark)",
+      "description": "Solid everyday espresso. Flavour Notes: Chocolate, Caramel, Red Fruits.",
+      "tags": ["Dark Roast", "Huila", "Espresso"],
+      "icon": "fas fa-coffee",
+      "variant": "fav",
+      "links": [
+        {
+          "href": "https://www.redber.co.uk/products/colombia-excelso-huila-dark-roast-coffee-beans",
+          "ariaLabel": "Supplier page",
+          "icon": "fas fa-external-link-alt"
+        }
+      ]
+    },
+    {
+      "title": "Decaf Central American Blend",
+      "description": "My go-to decaf. Keeps the natural crema and sweetness so it doesn't feel like a downgrade late at night. I prefer the CO2 process to the water process since I feel the coffee retains more flavour.",
+      "tags": ["CO2 Process", "Chocolate", "Decaf"],
+      "icon": "fas fa-mug-hot",
+      "variant": "decaf",
+      "links": [
+        {
+          "href": "https://www.redber.co.uk/collections/all-coffee-beans/products/central-american-decaf-blend-dark-roast-coffee-beans",
+          "ariaLabel": "Supplier page",
+          "icon": "fas fa-external-link-alt"
+        }
+      ]
+    }
+  ]
+}

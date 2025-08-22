@@ -1,0 +1,45 @@
+{
+  "projects": [
+    {
+      "title": "Autonomous Drone Navigation",
+      "description": "My final year project - built an AI system that teaches drones to navigate on their own using reinforcement learning. Works with real DJI Tello drones!",
+      "tech": ["Python", "Q-Graphs", "Tello SDK"],
+      "icon": "fas fa-map-marker-alt",
+      "links": []
+    },
+    {
+      "title": "Norðhús Website",
+      "description": "Built a complete website from scratch for a Faroese company. Full responsive design with PHP backend and dynamic content management.",
+      "tech": ["PHP", "HTML", "CSS", "JavaScript"],
+      "icon": "fas fa-globe",
+      "links": [
+        {
+          "href": "https://nh.fo",
+          "ariaLabel": "Visit Norðhús website (opens in new tab)",
+          "icon": "fas fa-external-link-alt"
+        }
+      ]
+    },
+    {
+      "title": "Embedded Systems Suite",
+      "description": "Low-level C programming for Nordic microcontrollers. Built everything from GPIO control to real-time sensor data processing and displays.",
+      "tech": ["C", "nRF52", "I2C", "Real-Time"],
+      "icon": "fas fa-microchip",
+      "links": []
+    },
+    {
+      "title": "Distributed Auction System",
+      "description": "Secure online auction platform built with Java. Features encryption, user authentication, and fault-tolerant servers that keep running even if some crash.",
+      "tech": ["Java", "RMI", "Cryptography", "Fault Tolerance"],
+      "icon": "fas fa-network-wired",
+      "links": []
+    },
+    {
+      "title": "DNA Pattern Matcher",
+      "description": "Smart DNA analysis tool that converts genetic sequences into binary for faster pattern matching. Makes bioinformatics processing much more efficient.",
+      "tech": ["JavaScript", "String Matching"],
+      "icon": "fas fa-dna",
+      "links": []
+    }
+  ]
+}

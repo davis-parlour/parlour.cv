@@ -40,7 +40,7 @@
 			<div class="hero-content">
 				<div class="hero-text">
 					<div class="typing-container">
-						<span class="typing-text"></span>
+						<div class="typing-text"></div>
 					</div>
 				</div>
 			</div>
@@ -135,112 +135,10 @@
 				<div class="section-line"></div>
 			</div>
 			<div class="project-wheel-container">
-				<div class="project-wheel" id="projectWheel">
-					<div class="project-item" data-index="0">
-						<div class="project-card">
-							<div class="project-image">
-								<div class="project-placeholder">
-									<i class="fas fa-map-marker-alt"></i>
-								</div>
-							</div>
-							<div class="project-content">
-								<h3>Autonomous Drone Navigation</h3>
-								<p>My final year project - built an AI system that teaches drones to navigate on their own using reinforcement learning. Works with real DJI Tello drones!</p>
-								<div class="project-tech">
-									<span class="tech-tag">Python</span>
-									<span class="tech-tag">Q-Graphs</span>
-									<span class="tech-tag">Tello SDK</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="project-item" data-index="1">
-						<div class="project-card">
-							<div class="project-image">
-								<div class="project-placeholder">
-									<i class="fas fa-globe"></i>
-								</div>
-							</div>
-							<div class="project-content">
-								<h3>Norðhús Website</h3>
-								<p>Built a complete website from scratch for a Faroese company. Full responsive design with PHP backend and dynamic content management.</p>
-								<div class="project-tech">
-									<span class="tech-tag">PHP</span>
-									<span class="tech-tag">HTML</span>
-									<span class="tech-tag">CSS</span>
-									<span class="tech-tag">JavaScript</span>
-								</div>
-								<div class="project-links">
-									<a href="https://nh.fo" target="_blank" rel="noopener" class="project-link" aria-label="Visit Norðhús website (opens in new tab)"><i class="fas fa-external-link-alt"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="project-item" data-index="2">
-						<div class="project-card">
-							<div class="project-image">
-								<div class="project-placeholder">
-									<i class="fas fa-microchip"></i>
-								</div>
-							</div>
-							<div class="project-content">
-								<h3>Embedded Systems Suite</h3>
-								<p>Low-level C programming for Nordic microcontrollers. Built everything from GPIO control to real-time sensor data processing and displays.</p>
-								<div class="project-tech">
-									<span class="tech-tag">C</span>
-									<span class="tech-tag">nRF52</span>
-									<span class="tech-tag">I2C</span>
-									<span class="tech-tag">Real-Time</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="project-item" data-index="3">
-						<div class="project-card">
-							<div class="project-image">
-								<div class="project-placeholder">
-									<i class="fas fa-network-wired"></i>
-								</div>
-							</div>
-							<div class="project-content">
-								<h3>Distributed Auction System</h3>
-								<p>Secure online auction platform built with Java. Features encryption, user authentication, and fault-tolerant servers that keep running even if some crash.</p>
-								<div class="project-tech">
-									<span class="tech-tag">Java</span>
-									<span class="tech-tag">RMI</span>
-									<span class="tech-tag">Cryptography</span>
-									<span class="tech-tag">Fault Tolerance</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="project-item" data-index="4">
-						<div class="project-card">
-							<div class="project-image">
-								<div class="project-placeholder">
-									<i class="fas fa-dna"></i>
-								</div>
-							</div>
-							<div class="project-content">
-								<h3>DNA Pattern Matcher</h3>
-								<p>Smart DNA analysis tool that converts genetic sequences into binary for faster pattern matching. Makes bioinformatics processing much more efficient.</p>
-								<div class="project-tech">
-									<span class="tech-tag">JavaScript</span>
-									<span class="tech-tag">String Matching</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<div class="project-wheel" id="projectWheel"></div>
 				<div class="wheel-controls">
 					<button class="wheel-btn prev-btn" id="wheelPrevBtn"><i class="fas fa-chevron-left"></i></button>
-					<div class="wheel-dots">
-						<span class="wheel-dot active" data-index="0"></span>
-						<span class="wheel-dot" data-index="1"></span>
-						<span class="wheel-dot" data-index="2"></span>
-						<span class="wheel-dot" data-index="3"></span>
-						<span class="wheel-dot" data-index="4"></span>
-					</div>
+					<div class="wheel-dots" id="wheelDots"></div>
 					<button class="wheel-btn next-btn" id="wheelNextBtn"><i class="fas fa-chevron-right"></i></button>
 				</div>
 			</div>
@@ -288,18 +186,22 @@
 					<input type="hidden" name="_subject" value="Portfolio Contact">
 					<div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
 						<label for="hp_field">Do not fill this field</label>
-						<input type="text" id="hp_field" name="company" tabindex="-1" autocomplete="off">
+						<input type="text" id="hp_field" name="hp_company" tabindex="-1" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<input type="text" id="name" name="name" required autocomplete="name">
+						<input type="text" id="name" name="name" required autocomplete="name" placeholder=" ">
 						<label for="name">Your Name</label>
 					</div>
 					<div class="form-group">
-						<input type="email" id="email" name="email" required autocomplete="email">
+						<input type="email" id="email" name="email" required autocomplete="email" placeholder=" ">
 						<label for="email">Your Email</label>
 					</div>
 					<div class="form-group">
-						<textarea id="message" name="message" rows="5" required autocomplete="message"></textarea>
+						<input type="text" id="company" name="company" autocomplete="organization" placeholder=" ">
+						<label for="company">Company (optional)</label>
+					</div>
+					<div class="form-group">
+						<textarea id="message" name="message" rows="5" required autocomplete="message" placeholder=" "></textarea>
 						<label for="message">Your Message</label>
 					</div>
 					<button type="submit" class="btn btn-primary" aria-label="Send Message">
@@ -318,58 +220,7 @@
 				<h2 class="section-title">Coffee Corner</h2>
 				<div class="section-line"></div>
 			</div>
-			<div class="coffee-grid">
-				<div class="project-card coffee-card-simple coffee-card-negative">
-					<div class="project-image">
-						<div class="project-placeholder"><i class="fas fa-ban"></i></div>
-					</div>
-					<div class="project-content">
-						<h3>Grind House Blend</h3>
-						<p>Not for me - mostly bitter and flat no matter how I pulled it.</p>
-						<div class="project-tech">
-							<span class="tech-tag">Bitter</span>
-							<span class="tech-tag">Flat</span>
-						</div>
-						<div class="project-links">
-							<a href="https://www.amazon.co.uk/Grind-Coffee-Whole-Beans-Blend/dp/B0CHG2WHRX?ref_=ast_sto_dp&th=1" target="_blank" rel="noopener" class="project-link" aria-label="Product page"><i class="fas fa-external-link-alt"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="project-card coffee-card-simple coffee-card-fav">
-					<div class="project-image">
-						<div class="project-placeholder"><i class="fas fa-coffee"></i></div>
-					</div>
-					<div class="project-content">
-						<h3>Colombia Excelso Huila (Dark)</h3>
-						<p>Solid everyday espresso. <br> Flavour Notes: Chocolate, Caramel, Red Fruits.</p>
-						<div class="project-tech">
-							<span class="tech-tag">Dark Roast</span>
-							<span class="tech-tag">Huila</span>
-							<span class="tech-tag">Espresso</span>
-						</div>
-						<div class="project-links">
-							<a href="https://www.redber.co.uk/products/colombia-excelso-huila-dark-roast-coffee-beans" target="_blank" rel="noopener" class="project-link" aria-label="Supplier page"><i class="fas fa-external-link-alt"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="project-card coffee-card-simple coffee-card-decaf">
-					<div class="project-image">
-						<div class="project-placeholder"><i class="fas fa-mug-hot"></i></div>
-					</div>
-					<div class="project-content">
-						<h3>Decaf Central American Blend</h3>
-						<p>My go-to decaf. Keeps the natural crema and sweetness so it doesn't feel like a downgrade late at night. I prefer the CO2 process to the water process since I feel the coffee retains more flavour.</p>
-						<div class="project-tech">
-							<span class="tech-tag">CO2 Process</span>
-							<span class="tech-tag">Chocolate</span>
-							<span class="tech-tag">Decaf</span>
-						</div>
-						<div class="project-links">
-							<a href="https://www.redber.co.uk/collections/all-coffee-beans/products/central-american-decaf-blend-dark-roast-coffee-beans" target="_blank" rel="noopener" class="project-link" aria-label="Supplier page"><i class="fas fa-external-link-alt"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div class="coffee-grid" id="coffeeGrid"></div>
 		</div>
 	</section>
 
