@@ -278,7 +278,6 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    /* Reset default mobile button styles (iOS/Android render white rounded buttons) */
     background: transparent;
     background-color: transparent;
     border: 0;
@@ -286,8 +285,8 @@ body {
     margin: 0;
     -webkit-appearance: none;
     appearance: none;
-    color: inherit; /* so bars can use currentColor */
-    width: 44px; /* comfortable touch target */
+    color: inherit;
+    width: 44px;
     height: 44px;
 }
 
@@ -347,7 +346,6 @@ body {
     background-clip: text;
 }
 
-/* Larger, bolder hero title on desktop */
 .hero-title {
     font-size: clamp(2.2rem, 4.2vw, 3.2rem);
     font-weight: 800;
@@ -355,8 +353,6 @@ body {
     letter-spacing: -0.03em;
     margin-bottom: 0.5rem;
 }
-
-/* removed unused typing cursors + gradient-shift */
 
 .code-block {
     background: #1a1a1a;
@@ -406,7 +402,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.5rem;
-    color: #7fb8d6; /* muted cyan for lower brightness */
+    color: #7fb8d6;
     margin-bottom: 1rem;
     font-weight: 500;
     letter-spacing: -0.02em;
@@ -414,7 +410,7 @@ body {
 
 .hero-description {
     font-size: 1.125rem;
-    color: #a6adb6; /* calm neutral for degree line */
+    color: #a6adb6;
     margin-bottom: 2rem;
     max-width: 520px;
     line-height: 1.65;

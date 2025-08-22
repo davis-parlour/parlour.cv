@@ -15,7 +15,7 @@
       "links": [
         {
           "href": "https://nh.fo",
-          "ariaLabel": "Visit Norðhús website (opens in new tab)",
+          "ariaLabel": "Visit Norðhús website (opens in a new tab)",
           "icon": "fas fa-external-link-alt"
         }
       ]

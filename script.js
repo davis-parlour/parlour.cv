@@ -156,7 +156,6 @@ class ProjectWheel{
                 const p=pos[k];
                 item.style.transform=`translate(-50%, -50%) translate3d(${p.x}px,0,${p.z}px) rotateY(${p.a}deg) scale(${p.s})`;
                 item.style.opacity=p.o;
-                // apply a gentle blur to side items
                 const blur = k===0 ? 0 : (k===1 || k===4 ? 1.2 : 2.2);
                 item.style.filter = blur > 0 ? `blur(${blur}px) brightness(${p.o})` : 'none';
                 item.style.zIndex=pos.length-k;
