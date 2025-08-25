@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,33 @@
 	<link rel="stylesheet" href="styles.css?v=914d92b">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="icon" type="image/png" href="favicon.png">
+	<link rel="canonical" href="https://parlour.cv/">
+	<meta name="description" content="Graduate Software Engineer (First-Class BSc, Lancaster). Embedded systems, RL drone project, full-stack builds. View projects and grab my CV.">
+	<meta property="og:title" content="Davis Parlour – Portfolio">
+	<meta property="og:description" content="Embedded systems, RL drones, full-stack. View projects and download my CV.">
+	<meta property="og:url" content="https://parlour.cv/">
+	<meta property="og:type" content="website">
+	<meta name="twitter:card" content="summary_large_image">
+	<script type="application/ld+json">
+	{
+		"@context":"https://schema.org",
+		"@type":"Person",
+		"name":"Davis Parlour",
+		"url":"https://parlour.cv/",
+		"email":"mailto:davis@parlour.cv",
+		"sameAs":["https://github.com/davis-parlour","https://www.linkedin.com/in/davis-parlour"]
+	}
+	</script>
 </head>
 <body>
+	<a href="#main" class="visually-hidden focusable">Skip to content</a>
+	<header class="visually-hidden">
+		<h1>Davis Parlour – Software Engineer</h1>
+	</header>
 	<!-- navigation -->
 	<nav class="navbar">
 		<div class="nav-container">
@@ -24,18 +46,19 @@
 				<span class="bar"></span>
 				<span class="bar"></span>
 			</button>
-			<ul class="nav-menu" role="menu">
-				<li role="none"><a href="#home" class="nav-link" role="menuitem">Home</a></li>
-				<li role="none"><a href="#about" class="nav-link" role="menuitem">About</a></li>
-				<li role="none"><a href="#skills" class="nav-link" role="menuitem">Skills</a></li>
-				<li role="none"><a href="#projects" class="nav-link" role="menuitem">Projects</a></li>
-				<li role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
-				<li role="none"><a href="#coffee" class="nav-link" role="menuitem">Coffee</a></li>
+			<ul id="primary-nav" class="nav-menu">
+				<li><a href="#home" class="nav-link">Home</a></li>
+				<li><a href="#about" class="nav-link">About</a></li>
+				<li><a href="#skills" class="nav-link">Skills</a></li>
+				<li><a href="#projects" class="nav-link">Projects</a></li>
+				<li><a href="#contact" class="nav-link">Contact</a></li>
+				<li><a href="#coffee" class="nav-link">Coffee</a></li>
 			</ul>
 		</div>
 	</nav>
 
 	<!-- hero section -->
+	<main id="main">
 	<section id="home" class="hero">
 		<div class="hero-container">
 			<div class="hero-content">
@@ -55,8 +78,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="scroll-indicator">
-			<div class="scroll-arrow"></div>
+		<div class="scroll-indicator" aria-hidden="true">
+			<div class="scroll-arrow" aria-hidden="true"></div>
 		</div>
 	</section>
 
@@ -86,11 +109,11 @@
 						</div>
 						<div class="stat">
 							<span class="stat-number" data-count="6+">6+</span>
-							<span class="stat-label">Years of Experience</span>
+							<span class="stat-label">Years of Building</span>
 						</div>
 						<div class="stat">
-							<span class="stat-number" data-count=">70%">>70%</span>
-							<span class="stat-label">First Class Degree</span>
+							<span class="stat-number">1st</span>
+							<span class="stat-label">Class Honours</span>
 						</div>
 					</div>
 				</div>
@@ -110,7 +133,7 @@
 				<div class="coffee-controls">
 					<div class="coffee-slider-card">
 						<label for="intensitySlider" class="coffee-label" id="coffeeSliderLabel">Cups of Coffee</label>
-						<input type="range" id="intensitySlider" min="1" max="6" step="1" value="1" class="intensity-slider" aria-labelledby="coffeeSliderLabel" role="slider" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="Sleepy">
+						<input type="range" id="intensitySlider" min="1" max="6" step="1" value="1" class="intensity-slider" aria-labelledby="coffeeSliderLabel" aria-orientation="horizontal" role="slider" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="Sleepy">
 						<button type="button" id="calmCoffee" class="btn btn-secondary coffee-calm-btn" aria-label="Reduce coffee level gradually">Calm Down</button>
 					</div>
 					<div class="coffee-level-card" aria-live="polite">
@@ -187,14 +210,14 @@
 					<input type="hidden" name="_subject" value="Portfolio Contact">
 					<div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
 						<label for="hp_field">Do not fill this field</label>
-						<input type="text" id="hp_field" name="hp_company" tabindex="-1" autocomplete="off">
+						<input type="text" id="hp_field" name="_gotcha" tabindex="-1" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<input type="text" id="name" name="name" required autocomplete="name" placeholder=" ">
+						<input type="text" id="name" name="name" required aria-required="true" autocomplete="name" placeholder=" ">
 						<label for="name">Your Name</label>
 					</div>
 					<div class="form-group">
-						<input type="email" id="email" name="email" required autocomplete="email" placeholder=" ">
+						<input type="email" id="email" name="email" required aria-required="true" autocomplete="email" placeholder=" ">
 						<label for="email">Your Email</label>
 					</div>
 					<div class="form-group">
@@ -202,7 +225,7 @@
 						<label for="company">Company (optional)</label>
 					</div>
 					<div class="form-group">
-						<textarea id="message" name="message" rows="5" required autocomplete="message" placeholder=" "></textarea>
+						<textarea id="message" name="message" rows="5" required aria-required="true" autocomplete="message" placeholder=" "></textarea>
 						<label for="message">Your Message</label>
 					</div>
 					<button type="submit" class="btn btn-primary" aria-label="Send Message">
@@ -226,19 +249,20 @@
 	</section>
 
 	<!-- footer -->
+	</main>
 	<footer class="footer">
 		<div class="container">
 			<div class="footer-content">
 				<p>&copy; 2025 Davis Parlour. All rights reserved.</p>
 				<div class="social-links">
-					<a href="https://github.com/davis-parlour" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-					<a href="https://linkedin.com/in/davis-parlour" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+					<a href="https://github.com/davis-parlour" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+					<a href="https://linkedin.com/in/davis-parlour" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
 				</div>
 			</div>
 			<p class="analytics-note" role="note">This site uses Cloudflare Web Analytics to understand performance. All data is anonymous and no personal information is collected.</p>
 		</div>
 	</footer>
 	<!-- uses the github commit version to bust cache -->
-	<script src="script.js?v=914d92b"></script>
+	<script src="script.js?v=914d92b" defer></script>
 </body>
 </html>

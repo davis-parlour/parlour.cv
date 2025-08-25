@@ -15,7 +15,7 @@
 
 // skill bubbles
 class SkillBubbles {
-    constructor(){ this.container=document.getElementById('bubbleContainer'); this.bubbles=[]; this.skills=null; this.speed=1; this.friction=0.985; this.jit=0; this.k=0.6; this.wall=1; this.coffee=1; if(this.container) this.init(); }
+    constructor(){ this.container=document.getElementById('bubbleContainer'); this.bubbles=[]; this.skills=null; this.speed=1; this.friction=0.985; this.jit=0; this.k=0.6; this.wall=1; this.coffee=1; this.paused=false; if(this.container) this.init(); }
     init(){
         const slider=document.getElementById('intensitySlider');
         const valEl=document.getElementById('intensityValue');
@@ -23,7 +23,29 @@ class SkillBubbles {
         const stage=v=>v<=1?'Sleepy':v<=2?'Warming up':v<=5?'Productive':'TOO MANY!';
         const setStageClass=v=>{ const cls=v<=1?'sleepy':v<=2?'warming':v<=5?'productive':'too-many'; const list=document.body.classList; list.remove('coffee-stage-sleepy','coffee-stage-warming','coffee-stage-productive','coffee-stage-too-many'); list.add('coffee-stage-'+cls); };
         const ensureRainbowCss=()=>{ if(document.getElementById('coffeeRainbowCss')) return; const s=document.createElement('style'); s.id='coffeeRainbowCss'; s.textContent=`.coffee-rainbow{background:linear-gradient(90deg,#ff0040,#ff8000,#ffd500,#3cff00,#00e5ff,#6a00ff,#ff00d4);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:400% 100%;animation:coffeeRainbow 6s linear infinite}@keyframes coffeeRainbow{0%{background-position:0% 50%}100%{background-position:100% 50%}}`; document.head.appendChild(s); };
-    const update=()=>{ const v=parseInt(slider?.value||'1',10); this.coffee=v; this.speed=0.7+(v-1)*0.6; this.friction=0.992-(v-1)*0.012; this.jit=(v-1)*0.12; this.k=0.45+(v-1)*0.18; this.wall=1+(v-1)*0.12; setStageClass(v); if(valEl){ valEl.innerHTML=`${v} <span class="coffee-emoji" aria-hidden="true">☕</span> <span class="coffee-stage">(${stage(v)})</span>`; const stageEl=valEl.querySelector('.coffee-stage'); if(v>=6){ ensureRainbowCss(); stageEl&&stageEl.classList.add('coffee-rainbow'); valEl.classList.add('too-many-tilt'); levelCard&&levelCard.classList.add('coffee-overload'); valEl.style.color=''; } else { stageEl&&stageEl.classList.remove('coffee-rainbow'); valEl.classList.remove('too-many-tilt'); levelCard&&levelCard.classList.remove('coffee-overload'); valEl.style.color=v<=1?'#889':v<=5?'#14cba8':'#ff2d55'; } } if(slider){ slider.setAttribute('aria-valuenow',String(v)); slider.setAttribute('aria-valuetext',stage(v)); } };
+    const update=()=>{ const v=parseInt(slider?.value||'1',10); this.coffee=v; this.speed=0.7+(v-1)*0.6; this.friction=0.992-(v-1)*0.012; this.jit=(v-1)*0.12; this.k=0.45+(v-1)*0.18; this.wall=1+(v-1)*0.12; setStageClass(v);
+            if(valEl){
+                valEl.innerHTML = `${v} <span class="coffee-emoji" aria-hidden="true">☕</span> <span class="coffee-stage" aria-live="polite" aria-atomic="true">(${stage(v)})</span>`;
+                const stageEl = valEl.querySelector('.coffee-stage');
+                if(v>=6){
+                    ensureRainbowCss();
+                    stageEl && stageEl.classList.add('coffee-rainbow');
+                    valEl.classList.add('too-many-tilt');
+                    levelCard && levelCard.classList.add('coffee-overload');
+                    valEl.style.color = '';
+                } else {
+                    stageEl && stageEl.classList.remove('coffee-rainbow');
+                    valEl.classList.remove('too-many-tilt');
+                    levelCard && levelCard.classList.remove('coffee-overload');
+                    valEl.style.color = v<=1 ? '#889' : v<=5 ? '#14cba8' : '#ff2d55';
+                }
+            }
+            if(slider){
+                slider.setAttribute('aria-valuenow', String(v));
+                slider.setAttribute('aria-valuetext', stage(v));
+                slider.setAttribute('aria-orientation', 'horizontal');
+            }
+    };
         if(slider&&valEl){
             slider.addEventListener('input',()=>{ clearInterval(this.calmTimer); update(); });
             update();
@@ -79,6 +101,8 @@ class SkillBubbles {
     }
     loop(){ const step=()=>{ this.update(); requestAnimationFrame(step); }; requestAnimationFrame(step); }
     update(){
+    // early exit when section is not visible to save CPU (controlled by IntersectionObserver)
+    if(this.paused) return;
         const rect=this.container.getBoundingClientRect();
         // physics integration
         for(let i=0;i<this.bubbles.length;i++){
@@ -164,7 +188,8 @@ class ProjectWheel{
                 if(k==='End') { e.preventDefault(); this.pendingFocus=true; this.go(this.total-1); return; }
             });
         }
-        this.startAuto(); if(this.container){ this.container.addEventListener('mouseenter',()=>this.stopAuto()); this.container.addEventListener('mouseleave',()=>this.startAuto()); }
+    this.visible = true; // controlled by observer
+    this.startAuto(); if(this.container){ this.container.addEventListener('mouseenter',()=>this.stopAuto()); this.container.addEventListener('mouseleave',()=>this.startAuto()); }
         this.render();
     }
     render(){
@@ -213,9 +238,34 @@ class ContactForm{
         e.preventDefault(); const status=document.getElementById('formStatus'); const fd=new FormData(this.form);
         const name=(fd.get('name')||'').toString().trim(); const email=(fd.get('email')||'').toString().trim(); const msg=(fd.get('message')||'').toString().trim();
         const set=(m,ok=false)=>{ if(!status) return; status.textContent=m; status.classList.remove('success','error'); status.classList.add(ok?'success':'error'); };
-    if(fd.get('hp_company')) return; if(!name||!email||!msg) return set('Please fill in all fields.'); if(!/^[\w.!#$%&'*+/=?`{|}~-]+@[\w-]+(\.[\w-]+)+$/.test(email)) return set('Please enter a valid email address.');
+    // honeypot (Formspree) - early exit if filled
+    if(fd.get('_gotcha')) return;
+    // validation with aria-invalid toggling
+    const nameEl = this.form.querySelector('#name');
+    const emailEl = this.form.querySelector('#email');
+    const msgEl = this.form.querySelector('#message');
+    const setInvalid = (el, invalid) => { if(!el) return; if(invalid){ el.setAttribute('aria-invalid','true'); } else { el.removeAttribute('aria-invalid'); } };
+    let invalid = false;
+    if(!name){ setInvalid(nameEl, true); invalid = true; } else setInvalid(nameEl, false);
+    if(!email){ setInvalid(emailEl, true); invalid = true; } else setInvalid(emailEl, false);
+    if(!msg){ setInvalid(msgEl, true); invalid = true; } else setInvalid(msgEl, false);
+    if(invalid) return set('Please fill in all fields.');
+    if(!/^[\w.!#$%&'*+/=?`{|}~-]+@[\w-]+(\.[\w-]+)+$/.test(email)) { setInvalid(emailEl, true); return set('Please enter a valid email address.'); }
         set('Sending...', true);
-        try{ if(!this.form.querySelector('input[name="_subject"]')){ const i=document.createElement('input'); i.type='hidden'; i.name='_subject'; i.value='Portfolio Contact'; this.form.appendChild(i);} const res=await fetch(this.form.action||'https://formspree.io/f/mblkeoov',{method:'POST', headers:{'Accept':'application/json'}, body:fd}); if(res.ok){ set('Thank you! Your message has been sent.', true); this.form.reset(); } else { let m='Send failed. Please try again later.'; try{ const d=await res.json(); if(d&&d.error) m=d.error; }catch{} set(m);} } catch{ set('Network error. Please retry.'); }
+        try{
+            if(!this.form.querySelector('input[name="_subject"]')){ const i=document.createElement('input'); i.type='hidden'; i.name='_subject'; i.value='Portfolio Contact'; this.form.appendChild(i); }
+            const res=await fetch(this.form.action||'https://formspree.io/f/mblkeoov',{method:'POST', headers:{'Accept':'application/json'}, body:fd});
+            if(res.ok){
+                set('Thank you! Your message has been sent.', true);
+                this.form.reset();
+                // move focus to status and make it focusable for screen readers
+                try{ status.focus(); status.setAttribute('tabindex','-1'); }catch{}
+            } else {
+                let m='Send failed. Please try again later.';
+                try{ const d=await res.json(); if(d&&d.error) m=d.error; }catch{}
+                set(m);
+            }
+        } catch{ set('Network error. Please retry.'); }
     }
 }
 
@@ -241,6 +291,52 @@ function startTyping(){
 
 // boot
 document.addEventListener('DOMContentLoaded',()=>{ new SkillBubbles(); initProjects(); initCoffee(); new ContactForm(); setTimeout(startTyping,300); });
+
+// Intersection observer helper to pause heavy features when offscreen
+const observeSection = (el, onEnter, onLeave) => {
+    if(!el) return null;
+    const io = new IntersectionObserver(([e]) => e.isIntersecting ? onEnter() : onLeave(), {threshold: 0.1});
+    io.observe(el);
+    return io;
+};
+
+// Pause/resume skill bubbles when #skills section is offscreen
+const bubblesSection = document.querySelector('#skills');
+let bubblesInstance = null;
+// try to detect created instance (simple heuristic)
+setTimeout(()=>{
+    try{ bubblesInstance = window._skillBubbles || Array.from(document.querySelectorAll('#bubbleContainer')).map(()=>null)[0]; }catch{}
+}, 300);
+
+observeSection(bubblesSection, ()=>{
+    // find existing SkillBubbles instance and resume
+    document.querySelectorAll('*').forEach(()=>{});
+    // if instance created earlier, unpause
+    const sb = window._skillBubbles || window.skillBubblesInstance;
+    if(sb) sb.paused = false;
+    // if none, nothing to do
+}, ()=>{
+    const sb = window._skillBubbles || window.skillBubblesInstance;
+    if(sb) sb.paused = true;
+});
+
+// Pause project wheel auto-rotation when offscreen
+const projectsSection = document.querySelector('#projects');
+observeSection(projectsSection, ()=>{
+    // resume
+    const wheel = window._projectWheelInstance;
+    if(wheel){ wheel.startAuto(); }
+}, ()=>{
+    const wheel = window._projectWheelInstance;
+    if(wheel){ wheel.stopAuto(); }
+});
+
+// Expose instances when created so observer can find them
+const origSkillCtor = SkillBubbles;
+window.SkillBubbles = function(...args){ const inst = new origSkillCtor(...args); try{ window._skillBubbles = inst; window.skillBubblesInstance = inst; }catch{} return inst; };
+// patch ProjectWheel constructor exposure
+const origProjectWheelCtor = ProjectWheel;
+window.ProjectWheel = function(...args){ const inst = new origProjectWheelCtor(...args); try{ window._projectWheelInstance = inst; }catch{} return inst; };
 
 // coffee corner
 async function initCoffee(){

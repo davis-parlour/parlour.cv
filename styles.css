@@ -1,3 +1,23 @@
+/* Focusable skip link for accessibility */
+.focusable:focus {
+    position: static !important;
+    clip: auto;
+    height: auto;
+    width: auto;
+    padding: .5rem 1rem;
+    background: #00d4ff;
+    color: #000;
+    border-radius: .5rem;
+}
+/* Visually hidden helper for accessibility and SEO */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
 @media (max-width: 768px) {
     .project-wheel-container {
         padding: 0;
@@ -211,7 +231,7 @@ body {
     top: 0;
     width: 100%;
     background: rgba(12, 12, 12, 0.95);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
     z-index: 1000;
     transition: all 0.3s ease;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -648,6 +668,9 @@ body {
     padding: 100px 0;
 }
 
+/* Performance: let the browser skip rendering heavy sections when offscreen */
+section { content-visibility: auto; contain-intrinsic-size: 600px; }
+
 .skills-container {
     position: relative;
     max-width: 800px;
@@ -838,7 +861,7 @@ body {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     user-select: none;
     z-index: 1;
-    will-change: transform, border-radius;
+    /* removed constant will-change to reduce paint cost; kept hover transitions instead */
     overflow: visible;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     font-feature-settings: "kern" 1;
@@ -930,7 +953,6 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    backdrop-filter: blur(10px);
     transition: all 0.4s ease;
     position: relative;
 }
@@ -957,6 +979,11 @@ body {
     border-color: rgba(0, 212, 255, 0.3);
     box-shadow: 0 25px 50px rgba(0, 212, 255, 0.2);
 }
+
+/* apply heavier backdrop-filter only on hover/interaction to reduce GPU cost */
+.project-item:hover .project-card { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+.wheel-btn:hover { backdrop-filter: blur(8px); }
 
 .project-item.focused .project-card {
     background: rgba(255, 255, 255, 0.12);
@@ -1098,7 +1125,6 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
 }
@@ -1417,7 +1443,6 @@ body {
 
 }
 
-/* Coffee Grid (mirroring project cards) */
 .coffee-grid { display:grid; gap:1.75rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:2rem; }
 .coffee-card-simple { transition:transform .4s var(--ease, cubic-bezier(.25,.46,.45,.94)), box-shadow .4s var(--ease, cubic-bezier(.25,.46,.45,.94)); position:relative; display:flex; flex-direction:column; }
 .coffee-card-simple .project-placeholder { font-size:2.25rem; display:flex; align-items:center; justify-content:center; color:var(--accent,#00d4ff); }
@@ -1425,13 +1450,11 @@ body {
 .coffee-card-simple h3 { font-size:1.05rem; margin-bottom:.35rem; }
 .coffee-card-simple p { font-size:.85rem; line-height:1.3; }
 .coffee-card-simple .project-tech { margin-top:0; }
-/* Encourage consistent height between cards */
 .coffee-grid .project-card { min-height: 360px; }
 .coffee-card-negative { border:1px solid rgba(255,0,0,.35); box-shadow:0 0 0 1px rgba(255,0,0,.25),0 8px 22px -10px rgba(255,0,0,.35) !important; }
 .coffee-card-negative h3 { color:#ff6b6b; }
 .coffee-card-negative .project-placeholder { color:#ff6b6b; }
 .dark .coffee-card-negative { border-color:rgba(255,90,90,.4); }
-/* Removed Konami easter egg overlay styles */
 .coffee-card-fav { border:1px solid rgba(0,170,105,0.60); box-shadow:0 0 0 1px rgba(0,170,105,0.36),0 10px 26px -12px rgba(0,170,105,0.40); }
 .coffee-card-fav h3 { color:#2faf6e; }
 .coffee-card-fav .project-placeholder { color:#2faf6e; }
@@ -1441,12 +1464,10 @@ body {
 .coffee-card-decaf h3 { color:#73cfff; }
 .coffee-card-decaf .project-placeholder { color:#73cfff; }
 .coffee-card-decaf:hover { border-color:rgba(0,200,255,0.9); box-shadow:0 0 0 1px rgba(0,200,255,0.55),0 18px 42px -14px rgba(0,200,255,0.55); }
-/* About section pulsing grid (Hyperplexed-inspired) */
 .about { position:relative; }
 .about-grid-wrapper { position:absolute; inset:0; margin:0; max-width:none; height:100%; z-index:0; overflow:hidden; }
-.about-grid-wrapper .breathing-grid { position:absolute; inset:0; overflow:hidden; /* unified with projects section background */ background:rgba(255,255,255,0.02); }
+.about-grid-wrapper .breathing-grid { position:absolute; inset:0; overflow:hidden;  background:rgba(255,255,255,0.02); }
 .about { --about-grid-cutoff-height: 2px; }
-/* Bottom cutoff overlay so grid ends on a clean horizontal line */
 .about-grid-wrapper::after {
         content: "";
         position: absolute;
