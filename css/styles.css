@@ -1767,7 +1767,7 @@ noscript p {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: var(--section-rail) repeat(3, minmax(0, 1fr));
+  grid-template-columns: var(--section-rail) minmax(0, 1fr);
   gap: var(--layout-gap);
   padding-block: 3rem;
 }
@@ -1791,12 +1791,6 @@ noscript p {
   font-size: .76rem;
 }
 
-.footer-nav {
-  display: grid;
-  align-content: start;
-}
-
-.footer-nav a,
 .footer-utilities button {
   display: flex;
   align-items: center;
@@ -1805,15 +1799,14 @@ noscript p {
   font-size: .8rem;
 }
 
-.footer-nav a:hover,
 .footer-utilities button:hover {
   color: var(--cyan);
 }
 
 .footer-utilities {
   display: grid;
-  grid-column: 3 / -1;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-column: 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-content: start;
 }
 
@@ -2130,15 +2123,6 @@ noscript p {
   font-weight: 500;
   line-height: 1.5;
   white-space: nowrap;
-}
-
-.dialog-content pre {
-  margin: 1.5rem 0 0;
-  padding: 1.25rem;
-  overflow: auto;
-  background: var(--cyan-pale);
-  font-size: .84rem;
-  line-height: 1.75;
 }
 
 .release-entry {
@@ -2824,8 +2808,7 @@ noscript p {
     grid-template-columns: 1fr;
   }
 
-  .footer-utilities,
-  .footer-nav {
+  .footer-utilities {
     padding-top: 1rem;
     border-top: 1px solid #29353B;
   }
