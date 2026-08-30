@@ -11,22 +11,31 @@
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link
     rel="preload"
-    href="assets/images/tyne-bridge-construction.png"
+    href="assets/images/tyne-bridge-construction.avif"
     as="image"
+    type="image/avif"
+    imagesrcset="assets/images/tyne-bridge-construction-960.avif 960w, assets/images/tyne-bridge-construction.avif 1916w"
+    imagesizes="(max-width: 680px) 100vw, (max-width: 1160px) 800px, 50vw"
     fetchpriority="high"
   >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=20260830-1">
+  <link rel="stylesheet" href="css/styles.css?v=20260830-3">
 
   <meta property="og:title" content="Davis Parlour | Firmware Engineer">
   <meta property="og:description" content="Embedded C, JTAG debugging, hardware integration and firmware tooling across commercial instruments.">
   <meta property="og:url" content="https://parlour.cv/">
   <meta property="og:type" content="profile">
-  <meta property="og:image" content="https://parlour.cv/assets/images/tyne-bridge-construction.png">
-  <meta property="og:image:alt" content="Fine blue line drawing of the Tyne Bridge under construction">
+  <meta property="og:image" content="https://parlour.cv/assets/images/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Davis Parlour, Firmware Engineer — embedded C, hardware integration and debugging">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Davis Parlour | Firmware Engineer">
+  <meta name="twitter:description" content="Embedded C, JTAG debugging, hardware integration and firmware tooling across commercial instruments.">
+  <meta name="twitter:image" content="https://parlour.cv/assets/images/social-card.png">
+  <meta name="twitter:image:alt" content="Davis Parlour, Firmware Engineer — embedded C, hardware integration and debugging">
 
   <script type="application/ld+json">
   {
@@ -43,7 +52,7 @@
         "@id": "https://parlour.cv/#profile",
         "url": "https://parlour.cv/",
         "name": "Davis Parlour | Firmware Engineer",
-        "dateModified": "2026-08-25",
+        "dateModified": "2026-08-30",
         "mainEntity": { "@id": "https://parlour.cv/#davis" },
         "isPartOf": { "@id": "https://parlour.cv/#website" }
       },
@@ -117,14 +126,26 @@
         </div>
 
         <figure class="bridge-figure">
-          <img
-            src="assets/images/tyne-bridge-construction.png"
-            width="1916"
-            height="821"
-            alt="Fine blue line drawing of the Tyne Bridge under construction"
-            fetchpriority="high"
-            decoding="async"
-          >
+          <picture>
+            <source
+              type="image/avif"
+              srcset="assets/images/tyne-bridge-construction-960.avif 960w, assets/images/tyne-bridge-construction.avif 1916w"
+              sizes="(max-width: 680px) 100vw, (max-width: 1160px) 800px, 50vw"
+            >
+            <source
+              type="image/webp"
+              srcset="assets/images/tyne-bridge-construction-960.webp 960w, assets/images/tyne-bridge-construction.webp 1916w"
+              sizes="(max-width: 680px) 100vw, (max-width: 1160px) 800px, 50vw"
+            >
+            <img
+              src="assets/images/tyne-bridge-construction.png"
+              width="1916"
+              height="821"
+              alt="Fine blue line drawing of the Tyne Bridge under construction"
+              fetchpriority="high"
+              decoding="async"
+            >
+          </picture>
           <figcaption><span>Tyne bridge, under construction</span></figcaption>
         </figure>
       </div>
@@ -217,24 +238,19 @@
             <div class="role-main">
               <div class="role-intro">
                 <h3>Graduate Firmware Engineer</h3>
-                <p class="role-summary">I develop and maintain embedded C across four commercial firmware codebases, taking work from requirements and investigation through implementation, JTAG debugging, hardware validation and release.</p>
+                <p class="role-summary">I take firmware changes from an unclear requirement or product fault through design, implementation, physical-instrument validation and release.</p>
               </div>
               <div class="role-detail-grid">
                 <ul class="responsibility-list">
-                  <li>Embedded C features, fixes and releases across four commercial firmware codebases</li>
-                  <li>End-to-end ownership from requirements and investigation through validation</li>
-                  <li>MCU, peripheral and hardware integration on commercial instruments</li>
-                  <li>JTAG, oscilloscope and electrical fault investigation across firmware and electronics</li>
-                  <li>Compatibility across supported current and legacy hardware revisions</li>
-                  <li>Firmware testing, validation, boot-flow work and release support</li>
-                  <li>VS Code, Ninja, Python and developer tooling, including ~40% faster builds</li>
-                  <li>CI/CD, secure firmware signing, cryptography and compliance-driven firmware work</li>
-                  <li>Cross-functional work with electronics, chemistry, sales and marketing teams</li>
+                  <li>Embedded C product delivery spanning production features, new capabilities and legacy hardware</li>
+                  <li>MCU, peripheral and power integration validated with JTAG, an oscilloscope and bench instrumentation</li>
+                  <li>Secure boot and delivery work using signed firmware, Azure DevOps and Azure Key Vault</li>
+                  <li>Requirements translated with electronics, chemistry, sales and marketing teams</li>
                 </ul>
                 <aside class="secondary-role" aria-labelledby="specialist-title">
                   <div><p class="secondary-label">Palintest recognition</p><h3 id="specialist-title">AI Specialist <svg class="specialist-shield" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 2.8 7.3 7 9 4.2-1.7 7-4.5 7-9V6l-7-3Z"></path><path d="m9.2 11.6 1.8 1.8 3.9-4.2"></path></svg></h3></div>
                   <div class="secondary-role-copy">
-                    <p>Selected as Palintest's AI Specialist, evaluating practical uses for AI and prototyping internal tools for colleagues.</p>
+                    <p>Selected as Palintest's AI Specialist, building tools with Azure AI Foundry—including a chatbot that helps senior stakeholders explore Voice of Customer data.</p>
                   </div>
                 </aside>
               </div>
@@ -254,8 +270,8 @@
 
         <div class="section-content about-grid">
           <div class="prose about-copy">
-            <p>I like turning vague product behaviour into evidence before changing the code. I make the problem reproducible, inspect the system at the right level and work out where the fault actually belongs.</p>
-            <p>I rapidly pick up unfamiliar systems and domains, taking ownership of difficult engineering problems and if the development tools slow me down, I'll improve them.</p>
+            <p>I like turning vague product behaviour into evidence before changing the code. I make the problem reproducible and then inspect the system at the right level and work out where the fault lies.</p>
+            <p>I rapidly pick up unfamiliar systems and domains, take ownership of difficult engineering problems and if the development tools slow me down, I'll improve them.</p>
           </div>
 
           <aside class="now-panel" aria-labelledby="now-title">
@@ -264,9 +280,9 @@
               <h3 id="now-title">Current work</h3>
             </div>
             <ul>
-              <li>Features and fixes across four commercial firmware codebases.</li>
-              <li>Firmware and hardware investigations using JTAG and bench instrumentation.</li>
-              <li>Improving build, debug and release tooling when it slows the work down.</li>
+              <li>Standards-driven measurement work supporting compliance and new markets.</li>
+              <li>Secure firmware signing, boot-flow validation and protected credentials.</li>
+              <li>Hardware fault isolation across power, interfaces and firmware state.</li>
             </ul>
           </aside>
 
@@ -284,9 +300,18 @@
         <article class="education-card">
           <p class="profile-label">Education</p>
           <div class="education-copy">
-            <h2>BSc Computer Science</h2>
+            <div class="education-title">
+              <h2>BSc Computer Science</h2>
+              <time datetime="2025">2025</time>
+            </div>
             <p class="education-details"><strong>First Class Honours</strong><span>Lancaster University</span></p>
-            <p class="education-projects"><strong>University work</strong><span>Bare-metal nRF52833 peripheral development · Reinforcement-learning navigation with a DJI Tello</span></p>
+            <div class="education-projects">
+              <p>Selected university work</p>
+              <ul>
+                <li><span>Bare metal</span>nRF52833 peripheral development</li>
+                <li><span>Autonomy</span>Reinforcement-learning navigation with a DJI Tello</li>
+              </ul>
+            </div>
           </div>
           <img class="education-logo" src="assets/images/lu-logo.svg" alt="" aria-hidden="true" width="420" height="135">
         </article>
@@ -303,8 +328,8 @@
 
           <div class="profile-panels">
             <article class="profile-panel skills-panel" id="profile-panel-skills" role="tabpanel" aria-labelledby="profile-tab-skills" data-profile-panel="skills">
-              <ul class="inline-list skills-list" id="skills-list" data-content-list="skills"></ul>
-              <noscript><p>Embedded C · Firmware development · Renesas MCUs · nRF52 / nRF52833 · C / C++ · Python · Git · Embedded peripherals · Firmware debugging · Hardware-firmware debugging · Hardware integration · Bare-metal firmware · I2C · SPI · UART · Firmware testing · Build tooling · VS Code · Ninja · Release tooling · Cryptography · Product cybersecurity</p></noscript>
+              <div class="skills-groups" id="skills-list" data-content-list="skills"></div>
+              <noscript><p>Languages: Embedded C · C++ · Python · Bash · Java. MCUs and peripherals: Renesas MCUs · Bootloaders · GPIO · Timers · ADC · PWM · I2C · SPI · UART · Watchdogs · Sensors and displays. Debugging and validation: JTAG · Source-level debugging · Digital oscilloscope · Bench power supply · Multimeter · Root-cause analysis · Hardware validation. Delivery and security: Firmware security · Secure boot &amp; signing · Azure Key Vault · Azure DevOps · CI/CD · Git · GitHub · VS Code · Ninja. Product and AI: Requirements analysis · Azure AI Foundry · AI-assisted engineering · UI prototyping · Technical communication.</p></noscript>
             </article>
 
             <article class="profile-panel interests-panel" id="profile-panel-interests" role="tabpanel" aria-labelledby="profile-tab-interests" data-profile-panel="interests">
@@ -354,7 +379,7 @@
         <div class="contact-copy">
           <p>I'm happy where I am, but I'm always interested in firmware roles with difficult technical problems, strong engineers and real ownership.</p>
           <a class="contact-email" href="mailto:davis@parlour.cv"><span>davis@parlour.cv</span><span aria-hidden="true">↗</span></a>
-          <form class="contact-form" id="contactForm" action="https://formspree.io/f/mblkeoov" method="POST" accept-charset="UTF-8" aria-describedby="formStatus">
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/mblkeoov" method="POST" accept-charset="UTF-8" aria-describedby="contactPrivacy formStatus">
             <input type="hidden" name="_subject" value="Portfolio Contact">
             <div class="contact-honeypot" aria-hidden="true">
               <label for="company">Company</label>
@@ -378,6 +403,7 @@
               <button class="contact-submit" type="submit">Send message <span aria-hidden="true">↗</span></button>
               <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
             </div>
+            <p class="contact-privacy" id="contactPrivacy">Messages are processed by Formspree so they can be delivered to my inbox. No mailing lists or marketing.</p>
           </form>
           <div class="contact-links">
             <a href="https://www.linkedin.com/in/davis-parlour" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
@@ -446,6 +472,6 @@
     <div class="release-list" data-release-list><p class="release-status">Loading release notes...</p></div>
   </template>
 
-  <script src="js/script.js" defer></script>
+  <script src="js/script.js?v=20260830-3" defer></script>
 </body>
 </html>

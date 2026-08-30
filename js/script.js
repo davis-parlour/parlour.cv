@@ -82,11 +82,11 @@ workItems.forEach((item) => {
 });
 
 const contentLists = [
-  { url: 'assets/data/skills.json', key: 'skills', target: '#skills-list' },
+  { url: 'assets/data/skills.json?v=20260830-2', key: 'groups', target: '#skills-list', grouped: true },
   { url: 'assets/data/interests.json', key: 'interests', target: '#interests-list' }
 ];
 
-const loadContentList = async ({ url, key, target }) => {
+const loadContentList = async ({ url, key, target, grouped = false }) => {
   const list = document.querySelector(target);
   if (!list) return;
 
@@ -95,6 +95,42 @@ const loadContentList = async ({ url, key, target }) => {
     if (!response.ok) throw new Error(`${url}: ${response.status}`);
 
     const data = await response.json();
+    if (grouped) {
+      const groups = Array.isArray(data[key])
+        ? data[key].map((group) => ({
+          title: typeof group?.title === 'string' ? group.title.trim() : '',
+          skills: Array.isArray(group?.skills)
+            ? [...new Set(group.skills.filter((value) => typeof value === 'string').map((value) => value.trim()).filter(Boolean))]
+            : []
+        })).filter((group) => group.title && group.skills.length)
+        : [];
+
+      if (!groups.length) throw new Error(`${url}: no ${key} found`);
+
+      const fragment = document.createDocumentFragment();
+      groups.forEach(({ title, skills }) => {
+        const group = document.createElement('section');
+        group.className = 'skill-group';
+
+        const heading = document.createElement('h3');
+        heading.textContent = title;
+
+        const skillList = document.createElement('ul');
+        skillList.className = 'inline-list skills-list';
+        skills.forEach((value) => {
+          const item = document.createElement('li');
+          item.textContent = value;
+          skillList.append(item);
+        });
+
+        group.append(heading, skillList);
+        fragment.append(group);
+      });
+
+      list.replaceChildren(fragment);
+      return;
+    }
+
     const values = Array.isArray(data[key])
       ? [...new Set(data[key].filter((value) => typeof value === 'string').map((value) => value.trim()).filter(Boolean))]
       : [];
@@ -111,7 +147,7 @@ const loadContentList = async ({ url, key, target }) => {
     list.replaceChildren(fragment);
   } catch (error) {
     console.error(`Unable to load ${url}`, error);
-    const item = document.createElement('li');
+    const item = document.createElement(grouped ? 'p' : 'li');
     item.className = 'loading-item';
     item.textContent = 'Content unavailable.';
     list.replaceChildren(item);
@@ -122,6 +158,7 @@ Promise.all(contentLists.map(loadContentList));
 
 const contactForm = document.querySelector('#contactForm');
 const formStatus = document.querySelector('#formStatus');
+const contactSubmit = contactForm?.querySelector('[type="submit"]');
 
 contactForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -132,6 +169,8 @@ contactForm?.addEventListener('submit', async (event) => {
   formStatus.textContent = 'Sending...';
   formStatus.className = 'form-status';
   contactForm.classList.add('is-sending');
+  contactForm.setAttribute('aria-busy', 'true');
+  if (contactSubmit) contactSubmit.disabled = true;
 
   try {
     const response = await fetch(contactForm.action, {
@@ -151,6 +190,8 @@ contactForm?.addEventListener('submit', async (event) => {
     formStatus.classList.add('error');
   } finally {
     contactForm.classList.remove('is-sending');
+    contactForm.removeAttribute('aria-busy');
+    if (contactSubmit) contactSubmit.disabled = false;
   }
 });
 

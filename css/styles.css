@@ -643,6 +643,10 @@ button {
   pointer-events: none;
 }
 
+.bridge-figure picture {
+  display: contents;
+}
+
 .bridge-figure img {
   --bridge-fade: radial-gradient(
     ellipse 44% 125% at 50% 50%,
@@ -1198,14 +1202,15 @@ button {
 .education-card {
   display: grid;
   grid-template-areas:
-    "label label"
-    "copy logo";
-  grid-template-columns: minmax(0, 1fr) minmax(8rem, .6fr);
-  grid-template-rows: auto 1fr;
-  column-gap: clamp(1.25rem, 2vw, 2rem);
-  align-items: center;
-  padding: 2rem;
+    "label"
+    "copy"
+    "logo";
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr;
+  align-items: start;
+  padding: clamp(2rem, 3vw, 3rem);
   border-right: 1px solid var(--border);
+  background: linear-gradient(145deg, rgba(221, 243, 242, .48), rgba(252, 251, 247, .18) 52%, transparent 78%);
 }
 
 .education-card .profile-label {
@@ -1217,12 +1222,35 @@ button {
   min-width: 0;
 }
 
-.education-copy h2 {
-  margin-bottom: .45rem;
-  font-size: clamp(1.45rem, 2vw, 2rem);
+.education-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.education-title h2 {
+  max-width: 11ch;
+  margin: 0;
+  font-size: clamp(1.8rem, 2.35vw, 2.45rem);
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -.035em;
+  line-height: 1.08;
+  letter-spacing: -.045em;
+}
+
+.education-title time {
+  flex: 0 0 auto;
+  margin-top: .15rem;
+  padding: .28rem .55rem;
+  border: 1px solid rgba(23, 107, 116, .28);
+  border-radius: 999px;
+  color: var(--cyan-dark);
+  background: rgba(252, 251, 247, .72);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .06em;
 }
 
 .profile-switcher {
@@ -1299,42 +1327,68 @@ button {
 }
 
 .education-details {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0;
+  display: grid;
+  gap: .12rem;
+  margin: 1.1rem 0 0;
   color: var(--muted);
-  font-size: .88rem;
+  font-size: .82rem;
 }
 
 .education-details strong {
   color: var(--text);
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .education-projects {
-  display: flex;
-  flex-direction: column;
-  gap: .2rem;
-  margin: 1.1rem 0 0;
-  color: var(--muted);
-  font-size: .75rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.education-projects > p {
+  margin-bottom: .65rem;
+  color: var(--cyan-dark);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.education-projects ul {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.education-projects li {
+  display: grid;
+  gap: .18rem;
+  padding-block: .85rem;
+  color: var(--text);
+  font-size: .82rem;
   line-height: 1.45;
 }
 
-.education-projects strong {
-  color: var(--cyan-dark);
-  font-size: .66rem;
-  letter-spacing: .08em;
+.education-projects li + li {
+  border-top: 1px solid var(--border);
+}
+
+.education-projects li span {
+  color: var(--muted);
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .06em;
   text-transform: uppercase;
 }
 
 .education-logo {
   grid-area: logo;
-  align-self: center;
-  justify-self: center;
-  width: min(100%, 14rem);
+  align-self: end;
+  justify-self: start;
+  width: min(100%, 11rem);
   height: auto;
-  margin: 0;
+  margin: clamp(2.5rem, 4vw, 4rem) 0 0;
+  opacity: .9;
 }
 
 .js .profile-panel:not([hidden]) {
@@ -1377,7 +1431,22 @@ button {
   gap: .55rem .45rem;
 }
 
-.skills-list li:nth-child(-n + 3) {
+.skills-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem clamp(1rem, 2vw, 2rem);
+}
+
+.skill-group h3 {
+  margin-bottom: .7rem;
+  color: var(--cyan-dark);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.skill-group:first-child .skills-list li:nth-child(-n + 3) {
   border-color: rgba(23, 107, 116, .35);
   color: var(--cyan-dark);
   background: var(--cyan-pale);
@@ -1389,7 +1458,8 @@ button {
   background: rgba(216, 212, 240, .28);
 }
 
-.inline-list .loading-item {
+.inline-list .loading-item,
+.skills-groups .loading-item {
   color: var(--muted);
 }
 
@@ -1689,6 +1759,10 @@ noscript p {
   pointer-events: none;
 }
 
+.contact-submit:disabled {
+  cursor: wait;
+}
+
 .form-status {
   min-height: 1.2em;
   margin: 0;
@@ -1702,6 +1776,14 @@ noscript p {
 
 .form-status.error {
   color: #FFB3A7;
+}
+
+.contact-privacy {
+  max-width: 62ch;
+  margin: -.15rem 0 0;
+  color: #8FA0A5;
+  font-size: .7rem;
+  line-height: 1.5;
 }
 
 .contact-email {
@@ -2446,8 +2528,20 @@ noscript p {
   }
 
   .education-card {
+    grid-template-areas:
+      "label label"
+      "copy logo";
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, .35fr);
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(2rem, 5vw, 5rem);
     border-right: 0;
     border-bottom: 1px solid var(--border);
+  }
+
+  .education-logo {
+    align-self: end;
+    justify-self: end;
+    width: min(100%, 12rem);
   }
 
   .careers-card {
@@ -2678,8 +2772,8 @@ noscript p {
       "logo";
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    row-gap: .85rem;
-    padding: 1.5rem 0;
+    row-gap: 0;
+    padding: 1.75rem 0;
     border-right: 0;
     border-bottom: 1px solid var(--border);
   }
@@ -2687,7 +2781,7 @@ noscript p {
   .education-logo {
     justify-self: start;
     width: 9.5rem;
-    margin-top: .25rem;
+    margin-top: 2rem;
   }
 
   .profile-switcher-header {
@@ -2702,6 +2796,11 @@ noscript p {
   .profile-panel {
     min-height: 12rem;
     padding: 1.25rem 0 1.5rem;
+  }
+
+  .skills-groups {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
   .careers-card {

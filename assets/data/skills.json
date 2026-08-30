@@ -1,27 +1,66 @@
 {
-  "skills": [
-    "Embedded C",
-    "Firmware development",
-    "Renesas MCUs",
-    "C / C++",
-    "Python",
-    "Git",
-    "Embedded peripherals",
-    "Firmware debugging",
-    "Hardware-firmware debugging",
-    "Hardware integration",
-    "Bare-metal firmware",
-    "I2C",
-    "SPI",
-    "UART",
-    "Azure RTOS GUIX Studio",
-    "Thread X",
-    "Firmware testing",
-    "Build tooling",
-    "E² Studio",
-    "Ninja",
-    "Release tooling",
-    "Cryptography",
-    "Product cybersecurity"
+  "groups": [
+    {
+      "title": "Languages",
+      "skills": [
+        "Embedded C",
+        "C++",
+        "Python",
+        "Bash",
+        "Java"
+      ]
+    },
+    {
+      "title": "MCUs & peripherals",
+      "skills": [
+        "Renesas MCUs",
+        "Bootloaders",
+        "GPIO",
+        "Timers",
+        "ADC",
+        "PWM",
+        "I2C",
+        "SPI",
+        "UART",
+        "Watchdogs",
+        "Sensors & displays"
+      ]
+    },
+    {
+      "title": "Debugging & validation",
+      "skills": [
+        "JTAG",
+        "Source-level debugging",
+        "Digital oscilloscope",
+        "Bench power supply",
+        "Multimeter",
+        "Root-cause analysis",
+        "Hardware validation"
+      ]
+    },
+    {
+      "title": "Delivery & security",
+      "skills": [
+        "Firmware security",
+        "Secure boot & signing",
+        "Azure Key Vault",
+        "Azure DevOps",
+        "CI/CD",
+        "Git",
+        "GitHub",
+        "VS Code",
+        "Ninja"
+      ]
+    },
+    {
+      "title": "Product & AI",
+      "skills": [
+        "Requirements analysis",
+        "Azure AI Foundry",
+        "AI-assisted engineering",
+        "UI prototyping",
+        "Technical communication"
+      ]
+    }
   ]
 }
