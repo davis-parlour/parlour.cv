@@ -82,8 +82,8 @@ workItems.forEach((item) => {
 });
 
 const contentLists = [
-  { url: 'skills.json', key: 'skills', target: '#skills-list' },
-  { url: 'interests.json', key: 'interests', target: '#interests-list' }
+  { url: 'assets/data/skills.json', key: 'skills', target: '#skills-list' },
+  { url: 'assets/data/interests.json', key: 'interests', target: '#interests-list' }
 ];
 
 const loadContentList = async ({ url, key, target }) => {
@@ -199,13 +199,14 @@ const dialogContent = document.querySelector('[data-dialog-content]');
 const dialogClose = document.querySelector('[data-dialog-close]');
 let dialogOpener = null;
 let releaseNotesPromise = null;
+const releaseNotesUrl = 'assets/data/release-notes.json';
 
 const getReleaseNotes = () => {
   if (releaseNotesPromise) return releaseNotesPromise;
 
-  releaseNotesPromise = fetch('release-notes.json')
+  releaseNotesPromise = fetch(releaseNotesUrl)
     .then((response) => {
-      if (!response.ok) throw new Error(`release-notes.json: ${response.status}`);
+      if (!response.ok) throw new Error(`${releaseNotesUrl}: ${response.status}`);
       return response.json();
     })
     .then((data) => {
@@ -218,7 +219,7 @@ const getReleaseNotes = () => {
         })).filter((release) => release.version && release.changes.length)
         : [];
 
-      if (!releases.length) throw new Error('release-notes.json: no releases found');
+      if (!releases.length) throw new Error(`${releaseNotesUrl}: no releases found`);
       return releases;
     })
     .catch((error) => {
@@ -255,7 +256,7 @@ const renderReleaseNotes = async (container) => {
 
     container.replaceChildren(fragment);
   } catch (error) {
-    console.error('Unable to load release-notes.json', error);
+    console.error(`Unable to load ${releaseNotesUrl}`, error);
     if (!container.isConnected) return;
 
     const status = document.createElement('p');

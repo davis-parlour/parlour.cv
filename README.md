@@ -5,12 +5,10 @@ Personal website for Davis Parlour, hosted as a static site at [parlour.cv](http
 ## Structure
 
 - `index.html` — page content and semantic structure
-- `styles.css` — layout and visual system
-- `script.js` — navigation, dialogs, and JSON-backed lists
-- `skills.json` — technical skills shown on the site
-- `interests.json` — interests shown on the site
-- `release-notes.json` — changelog entries shown in the release-notes dialog
-- `tyne-bridge-construction.png` — original 1916 × 821 hero artwork
-- `Davis-Parlour-Firmware-Engineer-CV.pdf` — downloadable CV
+- `css/` — layout and visual styles
+- `js/` — navigation, dialogs, and JSON-backed lists
+- `assets/data/` — skills, interests, and release-note content
+- `assets/images/` — favicon, logos, and site artwork
+- `assets/documents/` — downloadable CV
 
 To view, open parlour.cv in your browser.
