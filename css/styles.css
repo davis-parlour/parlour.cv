@@ -1409,9 +1409,47 @@ noscript p {
 
 .careers-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: clamp(1.5rem, 4vw, 4rem);
+  gap: clamp(.75rem, 1.5vw, 1.5rem);
+}
+
+.employer-profile {
+  position: relative;
+  width: clamp(5rem, 8vw, 7rem);
+  margin-left: calc(clamp(.25rem, .75vw, .75rem) * -1);
+  margin-bottom: 0;
+}
+
+.employer-portrait {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(72, 64, 124, .28);
+  border-radius: 1rem;
+  background: rgba(252, 251, 247, .68);
+  box-shadow: inset 0 0 0 .45rem rgba(255, 255, 255, .25);
+  font-size: clamp(3rem, 5.5vw, 4.75rem);
+}
+
+.employer-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: .45rem;
+  object-fit: contain;
+}
+
+.employer-profile figcaption {
+  position: absolute;
+  top: calc(100% + .45rem);
+  left: 0;
+  width: 100%;
+  color: #4F4969;
+  font-size: .6rem;
+  line-height: 1.3;
+  text-align: center;
 }
 
 .careers-copy {
@@ -2688,6 +2726,10 @@ noscript p {
     gap: 0;
   }
 
+  .employer-profile {
+    display: none;
+  }
+
   .careers-copy {
     max-width: 34rem;
   }
@@ -2798,6 +2840,10 @@ noscript p {
 @media (max-width: 400px) {
   .hero-actions .text-link {
     width: 100%;
+  }
+
+  .employer-profile {
+    width: 4.5rem;
   }
 
 }
