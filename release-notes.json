@@ -1,0 +1,22 @@
+{
+  "releases": [
+    {
+      "version": "v2",
+      "changes": [
+        "Fixed the layout.",
+        "Added actual professional work.",
+        "Added the Tyne Bridge. Bridge still under construction.",
+        "Discovered cyan."
+      ]
+    },
+    {
+      "version": "v1",
+      "changes": [
+        "Built a CV website.",
+        "Put university projects everywhere because I didn't have a job yet.",
+        "It did, technically, work.",
+        "Added too many cards to fill space because I didn't have a job."
+      ]
+    }
+  ]
+}

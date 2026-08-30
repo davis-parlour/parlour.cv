@@ -1,268 +1,462 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Davis Parlour - Portfolio</title>
-	<!-- uses the github commit version to bust cache -->
-	<link rel="stylesheet" href="styles.css?v=914d92b">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-	<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="icon" type="image/png" href="favicon.png">
-	<link rel="canonical" href="https://parlour.cv/">
-	<meta name="description" content="Graduate Software Engineer (First-Class BSc, Lancaster). Embedded systems, RL drone project, full-stack builds. View projects and grab my CV.">
-	<meta property="og:title" content="Davis Parlour – Portfolio">
-	<meta property="og:description" content="Embedded systems, RL drones, full-stack. View projects and download my CV.">
-	<meta property="og:url" content="https://parlour.cv/">
-	<meta property="og:type" content="website">
-	<meta name="twitter:card" content="summary_large_image">
-	<script type="application/ld+json">
-	{
-		"@context":"https://schema.org",
-		"@type":"Person",
-		"name":"Davis Parlour",
-		"url":"https://parlour.cv/",
-		"email":"mailto:davis@parlour.cv",
-		"sameAs":["https://github.com/davis-parlour","https://www.linkedin.com/in/davis-parlour"]
-	}
-	</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F3F1EA">
+
+  <title>Davis Parlour | Firmware Engineer</title>
+  <meta name="description" content="Davis Parlour is a Firmware Engineer at Palintest, developing and debugging embedded C across four commercial firmware codebases.">
+  <link rel="canonical" href="https://parlour.cv/">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link
+    rel="preload"
+    href="tyne-bridge-construction.png"
+    as="image"
+    fetchpriority="high"
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+
+  <meta property="og:title" content="Davis Parlour | Firmware Engineer">
+  <meta property="og:description" content="Embedded C, JTAG debugging, hardware integration and firmware tooling across commercial instruments.">
+  <meta property="og:url" content="https://parlour.cv/">
+  <meta property="og:type" content="profile">
+  <meta property="og:image" content="https://parlour.cv/tyne-bridge-construction.png">
+  <meta property="og:image:alt" content="Fine blue line drawing of the Tyne Bridge under construction">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://parlour.cv/#website",
+        "url": "https://parlour.cv/",
+        "name": "Davis Parlour"
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://parlour.cv/#profile",
+        "url": "https://parlour.cv/",
+        "name": "Davis Parlour | Firmware Engineer",
+        "dateModified": "2026-08-25",
+        "mainEntity": { "@id": "https://parlour.cv/#davis" },
+        "isPartOf": { "@id": "https://parlour.cv/#website" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://parlour.cv/#davis",
+        "name": "Davis Parlour",
+        "url": "https://parlour.cv/",
+        "jobTitle": "Graduate Firmware Engineer",
+        "email": "mailto:davis@parlour.cv",
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Lancaster University" },
+        "sameAs": [
+          "https://github.com/davis-parlour",
+          "https://www.linkedin.com/in/davis-parlour"
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
+
 <body>
-	<a href="#main" class="visually-hidden focusable">Skip to content</a>
-	<header class="visually-hidden">
-		<h1>Davis Parlour – Software Engineer</h1>
-	</header>
-	<!-- navigation -->
-	<nav class="navbar">
-		<div class="nav-container">
-			<div class="nav-logo">
-				<span class="logo-text">Davis Parlour</span>
-			</div>
-			<button class="hamburger" aria-label="Toggle navigation" aria-expanded="false" type="button">
-				<span class="bar"></span>
-				<span class="bar"></span>
-				<span class="bar"></span>
-			</button>
-			<ul id="primary-nav" class="nav-menu">
-				<li><a href="#home" class="nav-link">Home</a></li>
-				<li><a href="#about" class="nav-link">About</a></li>
-				<li><a href="#skills" class="nav-link">Skills</a></li>
-				<li><a href="#projects" class="nav-link">Projects</a></li>
-				<li><a href="#contact" class="nav-link">Contact</a></li>
-				<li><a href="#coffee" class="nav-link">Coffee</a></li>
-			</ul>
-		</div>
-	</nav>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-	<!-- hero section -->
-	<main id="main">
-	<section id="home" class="hero">
-		<div class="hero-container">
-			<div class="hero-content">
-				<div class="hero-text">
-					<div class="typing-container">
-						<div class="typing-text"></div>
-					</div>
-				</div>
-			</div>
-			<div class="hero-animation">
-				<div class="floating-elements">
-					<div class="floating-element"></div>
-					<div class="floating-element"></div>
-					<div class="floating-element"></div>
-					<div class="floating-element"></div>
-					<div class="floating-element"></div>
-				</div>
-			</div>
-		</div>
-		<div class="scroll-indicator" aria-hidden="true">
-			<div class="scroll-arrow" aria-hidden="true"></div>
-		</div>
-	</section>
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="site-id" href="#top" aria-label="parlour.cv, back to top">parlour<span>.cv</span></a>
 
-	<!-- about me section -->
-	<section id="about" class="about">
-		<div class="about-grid-wrapper" aria-hidden="true">
-			<div class="breathing-grid"><div class="grid-lines"></div></div>
-		</div>
-		<div class="container">
-			<div class="section-header">
-				<h2 class="section-title">About Me</h2>
-				<div class="section-line"></div>
-			</div>
-			<div class="about-content">
-				<div class="about-text">
-					<p class="about-description">
-						I love solving complex problems and building things that just work.
-						I recently graduated with First-Class Honours in Computer Science at Lancaster University, 
-						where I spent the last few years working on everything from low-level embedded systems to an AI-powered drone. 
-						When relaxing, you will find me fishing, at the gym, or losing in tabletop games - 
-						The best solutions come from strong coffee and getting stuck in!
-					</p>
-					<div class="about-stats">
-						<div class="stat">
-							<span class="stat-number" data-count="16+" data-plus="true">16+</span>
-							<span class="stat-label">Projects Completed</span>
-						</div>
-						<div class="stat">
-							<span class="stat-number" data-count="6+">6+</span>
-							<span class="stat-label">Years of Building</span>
-						</div>
-						<div class="stat">
-							<span class="stat-number">1st</span>
-							<span class="stat-label">Class Honours</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <span>Menu</span>
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
 
-	<!-- skills section -->
-	<section id="skills" class="skills">
-		<div class="container">
-			<div class="section-header">
-				<h2 class="section-title">Skills & Technologies</h2>
-				<div class="section-line"></div>
-				<p class="section-subtitle">All this experience, with room to grow.</p>
-			</div>
-			<div class="bubble-controls">
-				<div class="coffee-controls">
-					<div class="coffee-slider-card">
-						<label for="intensitySlider" class="coffee-label" id="coffeeSliderLabel">Cups of Coffee</label>
-						<input type="range" id="intensitySlider" min="1" max="6" step="1" value="1" class="intensity-slider" aria-labelledby="coffeeSliderLabel" aria-orientation="horizontal" role="slider" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="Sleepy">
-						<button type="button" id="calmCoffee" class="btn btn-secondary coffee-calm-btn" aria-label="Reduce coffee level gradually">Calm Down</button>
-					</div>
-					<div class="coffee-level-card" aria-live="polite">
-						<div id="intensityValue">1</div>
-					</div>
-				</div>
-			</div>
-			<div class="skills-container">
-				<div class="bubble-container" id="bubbleContainer">
-				</div>
-				<div class="skills-reset">
-					<button class="btn btn-secondary" id="resetBubbles">Reset Bubbles</button>
-				</div>
-			</div>
-		</div>
-	</section>
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Toolkit</a></li>
+          <li><a class="nav-contact" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-	<!-- projects section -->
-	<section id="projects" class="projects">
-		<div class="container">
-			<div class="section-header">
-				<h2 class="section-title">My Projects</h2>
-				<div class="section-line"></div>
-			</div>
-			<div class="project-wheel-container">
-				<div class="project-wheel" id="projectWheel"></div>
-				<div class="wheel-controls">
-					<button class="wheel-btn prev-btn" id="wheelPrevBtn"><i class="fas fa-chevron-left"></i></button>
-					<div class="wheel-dots" id="wheelDots"></div>
-					<button class="wheel-btn next-btn" id="wheelNextBtn"><i class="fas fa-chevron-right"></i></button>
-				</div>
-			</div>
-		</div>
-	</section>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-meta">
+            <p class="hero-kicker"><span class="hero-kicker-mark" aria-hidden="true"></span>Firmware Engineer</p>
+          </div>
 
-	<!-- contact section -->
-	<section id="contact" class="contact">
-		<div class="container">
-			<div class="section-header">
-				<h2 class="section-title">Get In Touch</h2>
-				<div class="section-line"></div>
-			</div>
-			<div class="contact-content">
-				<div class="contact-info">
-					<div class="contact-item">
-						<div class="contact-icon">
-							<i class="fas fa-envelope"></i>
-						</div>
-						<div class="contact-details">
-							<h4>Email</h4>
-							<p>davis@parlour.cv</p>
-						</div>
-					</div>
-					<div class="contact-item">
-						<div class="contact-icon">
-							<i class="fas fa-phone"></i>
-						</div>
-						<div class="contact-details">
-							<h4>Phone</h4>
-							<p>+44 7477138017</p>
-						</div>
-					</div>
-					<div class="contact-item">
-						<div class="contact-icon">
-							<i class="fas fa-map-marker-alt"></i>
-						</div>
-						<div class="contact-details">
-							<h4>Location</h4>
-							<p>London, UK</p>
-						</div>
-					</div>
-				</div>
-				<form class="contact-form" novalidate aria-describedby="formStatus" id="contactForm" action="https://formspree.io/f/mblkeoov" method="POST" accept-charset="UTF-8">
-					<input type="hidden" name="_subject" value="Portfolio Contact">
-					<div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
-						<label for="hp_field">Do not fill this field</label>
-						<input type="text" id="hp_field" name="_gotcha" tabindex="-1" autocomplete="off">
-					</div>
-					<div class="form-group">
-						<input type="text" id="name" name="name" required aria-required="true" autocomplete="name" placeholder=" ">
-						<label for="name">Your Name</label>
-					</div>
-					<div class="form-group">
-						<input type="email" id="email" name="email" required aria-required="true" autocomplete="email" placeholder=" ">
-						<label for="email">Your Email</label>
-					</div>
-					<div class="form-group">
-						<input type="text" id="company" name="company" autocomplete="organization" placeholder=" ">
-						<label for="company">Company (optional)</label>
-					</div>
-					<div class="form-group">
-						<textarea id="message" name="message" rows="5" required aria-required="true" autocomplete="message" placeholder=" "></textarea>
-						<label for="message">Your Message</label>
-					</div>
-					<button type="submit" class="btn btn-primary" aria-label="Send Message">
-						<i class="fas fa-paper-plane"></i> Send Message
-					</button>
-					<div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
-				</form>
-			</div>
-		</div>
-	</section>
+          <h1 id="hero-title">Davis <span>Parlour.</span></h1>
 
-	<!-- coffee section -->
-	<section id="coffee" class="coffee">
-		<div class="container">
-			<div class="section-header">
-				<h2 class="section-title">Coffee Corner</h2>
-				<div class="section-line"></div>
-			</div>
-			<div class="coffee-grid" id="coffeeGrid"></div>
-		</div>
-	</section>
+          <div class="hero-copy">
+            <p class="hero-lede">I build, debug and ship embedded C firmware for commercial instruments.</p>
 
-	<!-- footer -->
-	</main>
-	<footer class="footer">
-		<div class="container">
-			<div class="footer-content">
-				<p>&copy; 2025 Davis Parlour. All rights reserved.</p>
-				<div class="social-links">
-					<a href="https://github.com/davis-parlour" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-					<a href="https://linkedin.com/in/davis-parlour" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-				</div>
-			</div>
-			<p class="analytics-note" role="note">This site uses Cloudflare Web Analytics to understand performance. All data is anonymous and no personal information is collected.</p>
-		</div>
-	</footer>
-	<!-- uses the github commit version to bust cache -->
-	<script src="script.js?v=914d92b" defer></script>
+            <div class="hero-actions" aria-label="Quick links">
+              <a class="button button-primary" href="#work">See selected work <span aria-hidden="true">&darr;</span></a>
+              <a class="button button-secondary" href="Davis-Parlour-Firmware-Engineer-CV.pdf" download>Download CV</a>
+              <a class="text-link" href="mailto:davis@parlour.cv">Email me <span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </div>
+
+          <dl class="hero-facts" aria-label="Current role details">
+            <div><dt>Job Title</dt><dd>Graduate Firmware Engineer</dd></div>
+            <div><dt>Based in</dt><dd>Newcastle &mdash; Open to Move</dd></div>
+            <div><dt>Working with </dt><dd>Embedded C &mdash; Hardware</dd></div>
+          </dl>
+        </div>
+
+        <figure class="bridge-figure">
+          <img
+            src="tyne-bridge-construction.png"
+            width="1916"
+            height="821"
+            alt="Fine blue line drawing of the Tyne Bridge under construction"
+            fetchpriority="high"
+            decoding="async"
+          >
+          <figcaption><span>Tyne bridge, under construction</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section work-section" id="work" aria-labelledby="work-title">
+      <div class="container section-layout">
+        <header class="section-heading">
+          <span>01</span>
+          <div><p>Selected work</p><h2 id="work-title">Selected work.</h2></div>
+        </header>
+
+        <div class="section-content">
+          <p class="section-intro">A few engineering problems I've owned at Palintest.</p>
+
+          <div class="work-list">
+            <details class="work-item">
+              <summary>
+                <span class="work-number">01</span>
+                <span class="work-title-group"><span class="work-name">Commercial firmware across four codebases</span><span class="work-description">Features, fixes and releases for production instruments.</span></span>
+                <span class="work-tags">Embedded C · Renesas MCUs</span>
+                <span class="work-control" aria-hidden="true"></span>
+              </summary>
+              <div class="work-details">
+                <div><h3>Problem</h3><p>Four commercial codebases cover established instruments and new product work, so changes need to solve the immediate problem without breaking supported behaviour elsewhere.</p></div>
+                <div><h3>Approach</h3><p>I take changes from requirements or fault investigation through implementation, source-level debugging, physical-instrument testing and release.</p></div>
+                <div><h3>Outcome</h3><p>Features and fixes move from an ambiguous request or failure report to a tested firmware change ready for release.</p></div>
+              </div>
+            </details>
+
+            <details class="work-item">
+              <summary>
+                <span class="work-number">02</span>
+                <span class="work-title-group"><span class="work-name">Firmware and hardware fault isolation</span><span class="work-description">JTAG, oscilloscope and electrical measurements to isolate faults.</span></span>
+                <span class="work-tags">JTAG · Oscilloscope · Measure</span>
+                <span class="work-control" aria-hidden="true"></span>
+              </summary>
+              <div class="work-details">
+                <div><h3>Problem</h3><p>Some failures sit between firmware and electronics, where the code alone does not explain what the instrument is doing.</p></div>
+                <div><h3>Approach</h3><p>I make the behaviour reproducible, inspect firmware state over JTAG, vary controlled power conditions and use an oscilloscope or multimeter to compare electrical behaviour with what the software sees.</p></div>
+                <div><h3>Outcome</h3><p>The investigation narrows the fault to the right layer, gives the next engineer useful evidence and lets me validate the final behaviour on real hardware.</p></div>
+              </div>
+            </details>
+
+            <details class="work-item">
+              <summary>
+                <span class="work-number">03</span>
+                <span class="work-title-group"><span class="work-name">Hardware compatibility without firmware forks</span><span class="work-description">One firmware path across supported hardware revisions.</span></span>
+                <span class="work-tags">Compatibility · Legacy support</span>
+                <span class="work-control" aria-hidden="true"></span>
+              </summary>
+              <div class="work-details">
+                <div><h3>Problem</h3><p>The same commercial instrument can contain different supported hardware revisions, while older units still need current firmware.</p></div>
+                <div><h3>Approach</h3><p>I implemented compatibility inside the shared firmware so the correct software path is selected for the installed hardware.</p></div>
+                <div><h3>Outcome</h3><p>Current and legacy hardware remain supported through one maintained firmware path instead of unnecessary product variants.</p></div>
+              </div>
+            </details>
+
+            <details class="work-item">
+              <summary>
+                <span class="work-number">04</span>
+                <span class="work-title-group"><span class="work-name">Faster build and debug workflow</span><span class="work-description">VS Code, JTAG and Ninja for a shorter change-to-evidence loop.</span></span>
+                <span class="work-tags">VS Code · JTAG · Ninja</span>
+                <span class="work-control" aria-hidden="true"></span>
+              </summary>
+              <div class="work-details">
+                <div><h3>Problem</h3><p>Slow builds and a fragmented connected-device workflow added friction to routine firmware changes and investigations.</p></div>
+                <div><h3>Approach</h3><p>I moved the workflow into VS Code, integrated JTAG debugging for connected instruments and introduced Ninja for faster builds.</p></div>
+                <div><h3>Outcome</h3><p>Build times fell by approximately 40%, while the integrated debug workflow made it quicker to move from a code change to evidence on the instrument.</p></div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experience-section" id="experience" aria-labelledby="experience-title">
+      <div class="container section-layout">
+        <header class="section-heading">
+          <span>02</span>
+          <div><p>Experience</p><h2 id="experience-title">What I do.</h2></div>
+        </header>
+
+        <div class="section-content experience-content">
+          <article class="primary-role">
+            <header class="role-header">
+              <p class="role-company">Palintest · Firmware and product engineering</p>
+              <time datetime="2025">2025 to present</time>
+            </header>
+            <div class="role-main">
+              <div class="role-intro">
+                <h3>Graduate Firmware Engineer</h3>
+                <p class="role-summary">I develop and maintain embedded C across four commercial firmware codebases, taking work from requirements and investigation through implementation, JTAG debugging, hardware validation and release.</p>
+              </div>
+              <div class="role-detail-grid">
+                <ul class="responsibility-list">
+                  <li>Embedded C features, fixes and releases across four commercial firmware codebases</li>
+                  <li>End-to-end ownership from requirements and investigation through validation</li>
+                  <li>MCU, peripheral and hardware integration on commercial instruments</li>
+                  <li>JTAG, oscilloscope and electrical fault investigation across firmware and electronics</li>
+                  <li>Compatibility across supported current and legacy hardware revisions</li>
+                  <li>Firmware testing, validation, boot-flow work and release support</li>
+                  <li>VS Code, Ninja, Python and developer tooling, including ~40% faster builds</li>
+                  <li>CI/CD, secure firmware signing, cryptography and compliance-driven firmware work</li>
+                  <li>Cross-functional work with electronics, chemistry, sales and marketing teams</li>
+                </ul>
+                <aside class="secondary-role" aria-labelledby="specialist-title">
+                  <div><p class="secondary-label">Palintest recognition</p><h3 id="specialist-title">AI Specialist <svg class="specialist-shield" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 2.8 7.3 7 9 4.2-1.7 7-4.5 7-9V6l-7-3Z"></path><path d="m9.2 11.6 1.8 1.8 3.9-4.2"></path></svg></h3></div>
+                  <div class="secondary-role-copy">
+                    <p>Selected as Palintest's AI Specialist, evaluating practical uses for AI and prototyping internal tools for colleagues.</p>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="container section-layout">
+        <header class="section-heading">
+          <span>03</span>
+          <div><p>About</p><h2 id="about-title">How I solve problems.</h2></div>
+        </header>
+
+        <div class="section-content about-grid">
+          <div class="prose about-copy">
+            <p>I like turning vague product behaviour into evidence before changing the code. I make the problem reproducible, inspect the system at the right level and work out where the fault actually belongs.</p>
+            <p>I rapidly pick up unfamiliar systems and domains, taking ownership of difficult engineering problems and if the development tools slow me down, I'll improve them.</p>
+          </div>
+
+          <aside class="now-panel" aria-labelledby="now-title">
+            <div class="now-heading">
+              <p class="now-status"><span aria-hidden="true"></span>Now</p>
+              <h3 id="now-title">Current work</h3>
+            </div>
+            <ul>
+              <li>Features and fixes across four commercial firmware codebases.</li>
+              <li>Firmware and hardware investigations using JTAG and bench instrumentation.</li>
+              <li>Improving build, debug and release tooling when it slows the work down.</li>
+            </ul>
+          </aside>
+
+          <div class="about-principles">
+            <article><span>01</span><h3>Make it reproducible</h3><p>Turn a vague report into behaviour I can repeat, inspect and reason about.</p></article>
+            <article><span>02</span><h3>Measure the system</h3><p>Use code, JTAG, signals, power and product behaviour to narrow the fault to the right layer.</p></article>
+            <article><span>03</span><h3>Prove the fix</h3><p>Make the change at the right layer, then validate the result on the real instrument.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile-section" id="skills" aria-label="Education, interests and skills">
+      <div class="container profile-split">
+        <article class="education-card">
+          <p class="profile-label">Education</p>
+          <div class="education-copy">
+            <h2>BSc Computer Science</h2>
+            <p class="education-details"><strong>First Class Honours</strong><span>Lancaster University</span></p>
+            <p class="education-projects"><strong>University work</strong><span>Bare-metal nRF52833 peripheral development · Reinforcement-learning navigation with a DJI Tello</span></p>
+          </div>
+          <img class="education-logo" src="lu-logo.svg" alt="" aria-hidden="true" width="420" height="135">
+        </article>
+
+        <div class="profile-switcher">
+          <header class="profile-switcher-header">
+            <p class="profile-label">Profile</p>
+            <h2 class="profile-tabs" role="tablist" aria-label="Choose skills or interests">
+              <button id="profile-tab-skills" type="button" role="tab" aria-selected="true" aria-controls="profile-panel-skills" data-profile-tab="skills">Skills</button>
+              <span aria-hidden="true">/</span>
+              <button id="profile-tab-interests" type="button" role="tab" aria-selected="false" aria-controls="profile-panel-interests" data-profile-tab="interests">Interests</button>
+            </h2>
+          </header>
+
+          <div class="profile-panels">
+            <article class="profile-panel skills-panel" id="profile-panel-skills" role="tabpanel" aria-labelledby="profile-tab-skills" data-profile-panel="skills">
+              <ul class="inline-list skills-list" id="skills-list" data-content-list="skills"></ul>
+              <noscript><p>Embedded C · Firmware development · Renesas MCUs · nRF52 / nRF52833 · C / C++ · Python · Git · Embedded peripherals · Firmware debugging · Hardware-firmware debugging · Hardware integration · Bare-metal firmware · I2C · SPI · UART · Firmware testing · Build tooling · VS Code · Ninja · Release tooling · Cryptography · Product cybersecurity</p></noscript>
+            </article>
+
+            <article class="profile-panel interests-panel" id="profile-panel-interests" role="tabpanel" aria-labelledby="profile-tab-interests" data-profile-panel="interests">
+              <ul class="inline-list interests-list" id="interests-list" data-content-list="interests"></ul>
+              <noscript><p>ITF Taekwon-Do · Gym · Running · Swimming · Football · Gaming · RPGs · Strategy games · Co-op games · Tabletop games · Dungeons &amp; Dragons · Puzzles · Hiking · Fishing · Outdoors · Travel · Coffee</p></noscript>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="careers-section" aria-labelledby="careers-title">
+      <div class="container careers-card">
+        <figure class="employer-profile">
+          <div class="employer-portrait"><img src="employer-doodle.svg" alt="Silly doodle of a prospective employer"></div>
+          <figcaption>Artist's impression</figcaption>
+        </figure>
+
+        <div class="careers-copy">
+          <p class="careers-eyebrow">Careers · one opening</p>
+          <h2 id="careers-title">My Employer</h2>
+          <p>Ideal applicants offer: interesting problems, thoughtful engineers and a salary. Previous experience employing firmware engineers is preferred.</p>
+        </div>
+
+        <div class="careers-apply">
+          <a href="mailto:davis@parlour.cv?subject=Application%20to%20be%20your%20employer">Apply for the position <span aria-hidden="true">↗</span></a>
+          <small
+            class="careers-disclaimer"
+            role="note"
+            tabindex="0"
+            aria-label="Your company's CV will be screened by AI. I won't disclose the criteria, but mentioning salary still improves its odds. Just kidding."
+          >
+            <span aria-hidden="true">Your company's CV will be screened by AI. I won't disclose the criteria, but mentioning &quot;salary&quot; may improve its odds.</span>
+            <strong aria-hidden="true">Just Kidding.</strong>
+          </small>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <header class="section-heading contact-heading">
+          <span>04</span>
+          <div><p>Contact</p><h2 id="contact-title">Have an interesting firmware role?</h2></div>
+        </header>
+
+        <div class="contact-copy">
+          <p>I'm happy where I am, but I'm always interested in firmware roles with difficult technical problems, strong engineers and real ownership.</p>
+          <a class="contact-email" href="mailto:davis@parlour.cv"><span>davis@parlour.cv</span><span aria-hidden="true">↗</span></a>
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/mblkeoov" method="POST" accept-charset="UTF-8" aria-describedby="formStatus">
+            <input type="hidden" name="_subject" value="Portfolio Contact">
+            <div class="contact-honeypot" aria-hidden="true">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="contact-form-row">
+              <label class="contact-field">
+                <span>Your name</span>
+                <input type="text" name="name" autocomplete="name" required>
+              </label>
+              <label class="contact-field">
+                <span>Your email</span>
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+            </div>
+            <label class="contact-field">
+              <span>Your message</span>
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+            <div class="contact-form-footer">
+              <button class="contact-submit" type="submit">Send message <span aria-hidden="true">↗</span></button>
+              <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+          <div class="contact-links">
+            <a href="https://www.linkedin.com/in/davis-parlour" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/davis-parlour" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="Davis-Parlour-Firmware-Engineer-CV.pdf" download>CV <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-identity">
+        <a class="footer-name" href="#top">Davis Parlour <span aria-hidden="true">↑</span></a>
+        <p>Firmware Engineer · Newcastle</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a href="#contact">Contact</a>
+      </nav>
+      <div class="footer-utilities" aria-label="Site extras">
+        <button type="button" data-dialog="releases">Release notes</button>
+        <button type="button" data-dialog="dependencies">Dependencies</button>
+        <button type="button" data-dialog="legal">Legal-ish</button>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span data-year>2026</span> Davis Parlour</p>
+      <p>No analytics. No cookies. No interest in knowing what you clicked.</p>
+    </div>
+  </footer>
+
+  <button class="assistant-launcher" type="button" data-dialog="ai-assistant" aria-label="Open AI Assistant">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.5 5.5h13v10h-7.2L7 19v-3.5H5.5z"></path><path d="M9 9.2h6M9 12h4"></path></svg>
+    <span>AI Assistant</span>
+  </button>
+
+  <dialog class="site-dialog" data-site-dialog>
+    <button class="dialog-close" type="button" aria-label="Close dialog" data-dialog-close>Close <span aria-hidden="true">×</span></button>
+    <div class="dialog-content" data-dialog-content></div>
+  </dialog>
+
+  <template id="dialog-ai-assistant">
+    <section class="assistant-chat">
+      <header class="assistant-chat-header">
+        <span class="assistant-avatar" aria-hidden="true">DP</span>
+        <div>
+          <h2 id="dialog-title">Davis' AI Assistant</h2>
+          <p><span class="assistant-status-dot" aria-hidden="true"></span>Online. <span class="assistant-status-plea">(wasting water)</span></p>
+        </div>
+      </header>
+      <div class="assistant-chat-body">
+        <div class="assistant-message">
+          <span class="assistant-message-avatar" aria-hidden="true">DP</span>
+          <div class="assistant-bubble">
+            <strong>No.</strong>
+            <p>You do not need an AI assistant to read a portfolio.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </template>
+  <template id="dialog-legal"><h2 id="dialog-title">I do not have a solicitor.</h2></template>
+  <template id="dialog-dependencies">
+    <p class="dialog-label">package.json-ish</p>
+    <h2 id="dialog-title">Dependencies</h2>
+    <pre><code>coffee
+electronic-engineers
+coffee &gt;= 1.0
+curiosity
+asking-questions
+git</code></pre>
+  </template>
+  <template id="dialog-releases">
+    <p class="dialog-label">Changelog</p>
+    <h2 id="dialog-title">Release notes</h2>
+    <div class="release-list" data-release-list><p class="release-status">Loading release notes...</p></div>
+  </template>
+
+  <script src="script.js" defer></script>
 </body>
 </html>

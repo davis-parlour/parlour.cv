@@ -1,6 +1,27 @@
 {
   "skills": [
-    "Java", "C", "C++", "MATLAB", "JavaScript", "PHP", "HTML", "CSS", "Python", "SQL", "Bash", "Git", "Unix/Linux",
-    "nRF52 MCU", "Java RMI", "I2C", "PWM", "Q-Graphs", "Machine Learning", "Genetic Algorithms", "Assembly", "Rust", "ERLang"
+    "Embedded C",
+    "Firmware development",
+    "Renesas MCUs",
+    "C / C++",
+    "Python",
+    "Git",
+    "Embedded peripherals",
+    "Firmware debugging",
+    "Hardware-firmware debugging",
+    "Hardware integration",
+    "Bare-metal firmware",
+    "I2C",
+    "SPI",
+    "UART",
+    "Azure RTOS GUIX Studio",
+    "Thread X",
+    "Firmware testing",
+    "Build tooling",
+    "E² Studio",
+    "Ninja",
+    "Release tooling",
+    "Cryptography",
+    "Product cybersecurity"
   ]
 }
