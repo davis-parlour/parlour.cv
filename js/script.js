@@ -315,9 +315,9 @@ const openDialog = (name, opener) => {
   dialogContent.replaceChildren(template.content.cloneNode(true));
   dialog.classList.toggle('assistant-dialog', name === 'ai-assistant');
   dialog.setAttribute('aria-labelledby', 'dialog-title');
-  document.body.classList.add('dialog-open');
   dialog.showModal();
-  dialogClose?.focus();
+  document.body.classList.add('dialog-open');
+  dialogClose?.focus({ preventScroll: true });
 
   if (name === 'releases') {
     const releaseList = dialogContent.querySelector('[data-release-list]');
@@ -342,7 +342,7 @@ dialog?.addEventListener('close', () => {
   dialog.removeAttribute('aria-labelledby');
   dialog.classList.remove('assistant-dialog');
   dialogContent?.replaceChildren();
-  dialogOpener?.focus();
+  dialogOpener?.focus({ preventScroll: true });
   dialogOpener = null;
 });
 
