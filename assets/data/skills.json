@@ -61,6 +61,15 @@
         "UI prototyping",
         "Technical communication"
       ]
+    },
+    {
+      "title": "Web (working familiarity)",
+      "skills": [
+        "JavaScript",
+        "HTML/CSS",
+        "PHP",
+        "SQL"
+      ]
     }
   ]
 }
